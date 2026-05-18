@@ -2,7 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import {
   Code2, Share2, Palette, MonitorSmartphone, Search, ShieldCheck, Check, ArrowRight,
+  AlertTriangle, TrendingDown, Layers, Compass, BarChart3, Rocket,
+  Target, Sparkles, LineChart, Smartphone, Quote,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
