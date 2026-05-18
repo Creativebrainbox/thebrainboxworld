@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -72,14 +73,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "BrainBoxWorld — Digital Marketing & SEO Services" },
+      { name: "description", content: "Professional Digital Marketing & SEO services. We help businesses achieve first-page Google rankings, boost traffic and grow conversions." },
+      { name: "author", content: "BrainBoxWorld" },
+      { property: "og:title", content: "BrainBoxWorld — Digital Marketing & SEO Services" },
+      { property: "og:description", content: "Professional Digital Marketing & SEO services for Shopify, WordPress, Bigcommerce, Wix, Joomla & Magento." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -114,6 +114,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Toaster />
     </QueryClientProvider>
   );
 }
