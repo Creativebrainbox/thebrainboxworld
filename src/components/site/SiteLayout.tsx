@@ -4,13 +4,16 @@ import { useState } from "react";
 
 const navItems = [
   { label: "HOME", to: "/", hash: undefined as string | undefined },
-  { label: "ABOUT US", to: "/", hash: "about" },
+  { label: "ABOUT", to: "/about", hash: undefined },
   { label: "SERVICES", to: "/", hash: "services" },
-  { label: "PORTFOLIOS", to: "/portfolio", hash: undefined },
+  { label: "PORTFOLIO", to: "/portfolio", hash: undefined },
+  { label: "CASE STUDIES", to: "/case-studies", hash: undefined },
+  { label: "BLOG", to: "/blog", hash: undefined },
   { label: "PACKAGES", to: "/packages", hash: undefined },
-  { label: "EXPERIENCE", to: "/experience", hash: undefined },
+  { label: "AUDIT", to: "/audit", hash: undefined },
   { label: "CONTACT", to: "/contact", hash: undefined },
 ];
+
 
 function TopBar() {
   return (
