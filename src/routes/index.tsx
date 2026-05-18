@@ -157,7 +157,58 @@ function HomePage() {
         </div>
       </section>
 
+      {/* The Problem */}
+      <section className="py-20 px-4 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-blue-400 font-semibold tracking-widest text-xs">THE PROBLEM</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 max-w-3xl mx-auto">
+              Most growth problems are structural — not traffic problems
+            </h2>
+            <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
+              Growing brands hit walls not because they lack visitors, but because their site infrastructure can't support scale. Sound familiar?
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {problems.map((p) => (
+              <div key={p.title} className="bg-slate-800/60 border border-slate-700 rounded-xl p-6">
+                <p.icon className="w-8 h-8 text-blue-400 mb-3" />
+                <h3 className="font-bold text-lg mb-2">{p.title}</h3>
+                <p className="text-sm text-slate-300 leading-relaxed">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-blue-600 font-semibold tracking-widest text-xs">OUR APPROACH</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 text-slate-800">
+              We think before we build. Then we build to scale.
+            </h2>
+            <p className="text-slate-600 mt-4 leading-relaxed">
+              Every engagement starts with diagnosis — not design. We map your growth architecture, identify structural friction, and build systems where strategy, design, technology and data reinforce each other.
+            </p>
+            <blockquote className="mt-6 border-l-4 border-blue-600 pl-4 italic text-slate-700">
+              "Most agencies build websites. We build growth systems. The difference is sustainable scale."
+            </blockquote>
+          </div>
+          <ul className="space-y-4">
+            {approach.map((a) => (
+              <li key={a} className="flex items-start gap-3 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <Check className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="font-semibold text-slate-800">{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Featured Work */}
+
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <SectionTitle>FEATURED WORK</SectionTitle>
