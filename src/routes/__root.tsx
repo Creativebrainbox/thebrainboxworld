@@ -77,9 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Professional Digital Marketing & SEO services. We help businesses achieve first-page Google rankings, boost traffic and grow conversions." },
       { name: "author", content: "BrainBoxWorld" },
       { property: "og:title", content: "BrainBoxWorld — Digital Marketing & SEO Services" },
-      { property: "og:description", content: "Professional Digital Marketing & SEO services for Shopify, WordPress, Bigcommerce, Wix, Joomla & Magento." },
+      { property: "og:description", content: "Professional Digital Marketing & SEO services. We help businesses achieve first-page Google rankings, boost traffic and grow conversions." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "BrainBoxWorld — Digital Marketing & SEO Services" },
+      { name: "twitter:description", content: "Professional Digital Marketing & SEO services. We help businesses achieve first-page Google rankings, boost traffic and grow conversions." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e60801b7-1e0b-4f60-9926-ef9fb565089a" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/e60801b7-1e0b-4f60-9926-ef9fb565089a" },
     ],
     links: [
       {
