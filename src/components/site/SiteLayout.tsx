@@ -20,17 +20,18 @@ function TopBar() {
     <div className="bg-slate-900 text-slate-200 text-xs sm:text-sm">
       <div className="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-2">
         <a href="https://wa.me/13312782900" className="flex items-center gap-2 hover:text-white">
-          <Phone className="w-4 h-4" /> WhatsApp: +1 (331) 278-2900
+          <Phone className="w-4 h-4" /><span>WhatsApp: +1 (331) 278-2900</span>
         </a>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
           <a href="mailto:info@brainboxworld.dedyn.io" className="flex items-center gap-2 hover:text-white">
-            <Mail className="w-4 h-4" /> info@brainboxworld.dedyn.io
+            <Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span>
           </a>
           <span className="flex items-center gap-2">
-            <Clock className="w-4 h-4" /> Mon-Sat : 9 AM to 6 PM
+            <Clock className="w-4 h-4" /><span>Mon-Sat : 9 AM to 6 PM</span>
           </span>
         </div>
       </div>
+
     </div>
   );
 }
