@@ -4,30 +4,34 @@ import { useState } from "react";
 
 const navItems = [
   { label: "HOME", to: "/", hash: undefined as string | undefined },
-  { label: "ABOUT US", to: "/", hash: "about" },
+  { label: "ABOUT", to: "/about", hash: undefined },
   { label: "SERVICES", to: "/", hash: "services" },
-  { label: "PORTFOLIOS", to: "/portfolio", hash: undefined },
+  { label: "PORTFOLIO", to: "/portfolio", hash: undefined },
+  { label: "CASE STUDIES", to: "/case-studies", hash: undefined },
+  { label: "BLOG", to: "/blog", hash: undefined },
   { label: "PACKAGES", to: "/packages", hash: undefined },
-  { label: "EXPERIENCE", to: "/experience", hash: undefined },
+  { label: "AUDIT", to: "/audit", hash: undefined },
   { label: "CONTACT", to: "/contact", hash: undefined },
 ];
+
 
 function TopBar() {
   return (
     <div className="bg-slate-900 text-slate-200 text-xs sm:text-sm">
       <div className="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-2">
         <a href="https://wa.me/13312782900" className="flex items-center gap-2 hover:text-white">
-          <Phone className="w-4 h-4" /> WhatsApp: +1 (331) 278-2900
+          <Phone className="w-4 h-4" /><span>WhatsApp: +1 (331) 278-2900</span>
         </a>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
           <a href="mailto:info@brainboxworld.dedyn.io" className="flex items-center gap-2 hover:text-white">
-            <Mail className="w-4 h-4" /> info@brainboxworld.dedyn.io
+            <Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span>
           </a>
           <span className="flex items-center gap-2">
-            <Clock className="w-4 h-4" /> Mon-Sat : 9 AM to 6 PM
+            <Clock className="w-4 h-4" /><span>Mon-Sat : 9 AM to 6 PM</span>
           </span>
         </div>
       </div>
+
     </div>
   );
 }
@@ -110,19 +114,23 @@ function Footer() {
           <h4 className="text-white font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2 text-sm">
             <li><Link to="/" className="hover:text-white">Home</Link></li>
+            <li><Link to="/about" className="hover:text-white">About</Link></li>
             <li><Link to="/portfolio" className="hover:text-white">Portfolio</Link></li>
+            <li><Link to="/case-studies" className="hover:text-white">Case Studies</Link></li>
+            <li><Link to="/blog" className="hover:text-white">Blog</Link></li>
             <li><Link to="/packages" className="hover:text-white">Packages</Link></li>
-            <li><Link to="/experience" className="hover:text-white">Experience</Link></li>
+            <li><Link to="/audit" className="hover:text-white">Free Audit</Link></li>
             <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-4">Contact</h4>
           <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4" /> +1 (331) 278-2900</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4" /> info@brainboxworld.dedyn.io</li>
-            <li className="flex items-center gap-2"><Clock className="w-4 h-4" /> Mon-Sat : 9 AM to 6 PM</li>
+            <li className="flex items-center gap-2"><Phone className="w-4 h-4" /><span>+1 (331) 278-2900</span></li>
+            <li className="flex items-center gap-2"><Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span></li>
+            <li className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>Mon-Sat : 9 AM to 6 PM</span></li>
           </ul>
+
         </div>
       </div>
       <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-400">

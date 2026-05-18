@@ -2,7 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import {
   Code2, Share2, Palette, MonitorSmartphone, Search, ShieldCheck, Check, ArrowRight,
+  AlertTriangle, TrendingDown, Layers, Compass, BarChart3, Rocket,
+  Target, Sparkles, LineChart, Smartphone, Quote,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -43,6 +46,52 @@ const offers = [
   { title: "Reputation Management", desc: "Create a positive image about your brand or product & protect your brand on the internet. We offer results online reputation management services.", img: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=500&h=300&fit=crop" },
   { title: "Web Development", desc: "We provide the best custom website development solutions for you. Our web design services are loved by startup's, businesses and organizations.", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop" },
 ];
+
+const problems = [
+  { icon: TrendingDown, title: "Traffic Has Plateaued", desc: "You've hit a ceiling and can't figure out what's broken in your growth engine." },
+  { icon: AlertTriangle, title: "Conversions Are Declining", desc: "Visitors are landing on your site but they aren't converting — the funnel is leaking." },
+  { icon: Layers, title: "Fragmented Tech Stack", desc: "Apps, tools, and integrations are duct-taped together with no cohesive system." },
+  { icon: Compass, title: "No Strategic Clarity", desc: "You're making tactical moves without a roadmap, clear priorities, or reliable data." },
+  { icon: BarChart3, title: "Poor Tracking & Visibility", desc: "You can't attribute revenue or measure performance with your current setup." },
+  { icon: Rocket, title: "Scaling Before Foundation", desc: "You're pouring into ads while the site itself underperforms and leaks margin." },
+];
+
+const approach = [
+  "Diagnostic-led methodology",
+  "Conversion-focused execution",
+  "Scalable growth infrastructure",
+  "Data-driven decision making",
+];
+
+const stats = [
+  { value: "250+", label: "Projects Delivered" },
+  { value: "180%", label: "Avg. Traffic Lift" },
+  { value: "$25M+", label: "Revenue Influenced" },
+  { value: "98%", label: "Client Satisfaction" },
+];
+
+const expertise = [
+  { icon: Target, title: "SEO Strategy", desc: "Technical SEO and on-page architecture that turn search visibility into qualified traffic and revenue." },
+  { icon: Sparkles, title: "Brand Experience Design", desc: "Visual identity and UX that communicate value and build emotional connection with your audience." },
+  { icon: LineChart, title: "Growth Systems", desc: "Data-driven frameworks that identify bottlenecks and create compounding growth across channels." },
+  { icon: Search, title: "Content & Organic Growth", desc: "Content architecture and editorial strategies that drive qualified traffic without ad dependency." },
+  { icon: Code2, title: "Custom Development", desc: "Shopify, WordPress, Webflow and custom builds engineered for performance and scale." },
+  { icon: Smartphone, title: "Mobile Optimization", desc: "Mobile-first design and performance work that captures the 70%+ of traffic shopping on phones." },
+];
+
+const testimonials = [
+  { quote: "BrainBoxWorld didn't just optimize our site — they rebuilt our entire growth engine. Organic traffic doubled within 90 days.", author: "Founder, Retrospec" },
+  { quote: "The strategic clarity they brought was unlike any agency we've worked with. Every decision was backed by data.", author: "CEO, Darn Tough" },
+  { quote: "They understood our positioning instantly. The new experience converts like nothing we had before.", author: "Marketing Lead, Trnda" },
+  { quote: "Our revenue tripled after they rebuilt our SEO and product discovery system. The ROI has been extraordinary.", author: "Co-Founder, Benetek" },
+];
+
+const insights = [
+  { tag: "Conversion Optimization", read: "8 min read", title: "Why Your Site Isn't Converting (And the 7 Structural Fixes That Will)", date: "March 2026", slug: "site-not-converting-7-structural-fixes" },
+  { tag: "SEO & AI", read: "10 min read", title: "The AI-Powered SEO Framework for eCommerce Brands in 2026", date: "March 2026", slug: "ai-powered-seo-framework-2026" },
+  { tag: "Technical Strategy", read: "7 min read", title: "Shopify 2.0 vs Custom Build: Which Architecture Scales Better?", date: "February 2026", slug: "shopify-2-vs-custom-build" },
+];
+
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -108,7 +157,58 @@ function HomePage() {
         </div>
       </section>
 
+      {/* The Problem */}
+      <section className="py-20 px-4 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-blue-400 font-semibold tracking-widest text-xs">THE PROBLEM</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 max-w-3xl mx-auto">
+              Most growth problems are structural — not traffic problems
+            </h2>
+            <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
+              Growing brands hit walls not because they lack visitors, but because their site infrastructure can't support scale. Sound familiar?
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {problems.map((p) => (
+              <div key={p.title} className="bg-slate-800/60 border border-slate-700 rounded-xl p-6">
+                <p.icon className="w-8 h-8 text-blue-400 mb-3" />
+                <h3 className="font-bold text-lg mb-2">{p.title}</h3>
+                <p className="text-sm text-slate-300 leading-relaxed">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-blue-600 font-semibold tracking-widest text-xs">OUR APPROACH</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-3 text-slate-800">
+              We think before we build. Then we build to scale.
+            </h2>
+            <p className="text-slate-600 mt-4 leading-relaxed">
+              Every engagement starts with diagnosis — not design. We map your growth architecture, identify structural friction, and build systems where strategy, design, technology and data reinforce each other.
+            </p>
+            <blockquote className="mt-6 border-l-4 border-blue-600 pl-4 italic text-slate-700">
+              "Most agencies build websites. We build growth systems. The difference is sustainable scale."
+            </blockquote>
+          </div>
+          <ul className="space-y-4">
+            {approach.map((a) => (
+              <li key={a} className="flex items-start gap-3 bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <Check className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="font-semibold text-slate-800">{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Featured Work */}
+
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <SectionTitle>FEATURED WORK</SectionTitle>
@@ -218,7 +318,83 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Stats */}
+      <section className="py-16 px-4 bg-blue-600 text-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div className="text-4xl md:text-5xl font-bold">{s.value}</div>
+              <div className="text-sm uppercase tracking-wider text-blue-100 mt-2">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Areas of Expertise */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle>AREAS OF EXPERTISE</SectionTitle>
+          <p className="text-center text-slate-600 -mt-8 mb-12 max-w-2xl mx-auto">
+            Deep specialization across every discipline that drives online growth — from strategy to execution.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {expertise.map((e) => (
+              <div key={e.title} className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition">
+                <e.icon className="w-8 h-8 text-blue-600 mb-3" />
+                <h3 className="font-bold text-lg text-slate-800 mb-2">{e.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{e.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 px-4 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle>WHAT OUR CLIENTS SAY</SectionTitle>
+          <div className="grid md:grid-cols-2 gap-6">
+            {testimonials.map((t) => (
+              <div key={t.author} className="bg-white rounded-xl border border-slate-200 p-6">
+                <Quote className="w-8 h-8 text-blue-600 mb-3" />
+                <p className="text-slate-700 italic leading-relaxed">"{t.quote}"</p>
+                <div className="mt-4 text-sm font-semibold text-slate-800">— {t.author}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Insights */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle>LATEST INSIGHTS</SectionTitle>
+          <div className="grid md:grid-cols-3 gap-6">
+            {insights.map((i) => (
+              <Link key={i.slug} to="/blog" className="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
+                <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
+                  <span className="text-blue-600 font-semibold">{i.tag}</span>
+                  <span>•</span>
+                  <span>{i.read}</span>
+                </div>
+                <h3 className="font-bold text-slate-800 mb-3 leading-snug">{i.title}</h3>
+                <div className="text-xs text-slate-500">{i.date}</div>
+                <div className="mt-4 text-sm text-blue-600 font-semibold flex items-center gap-1">
+                  Read More <ArrowRight className="w-3 h-3" />
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/blog" className="inline-block px-6 py-3 rounded-md bg-slate-800 text-white font-semibold hover:bg-slate-900">
+              Read All Articles
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
+
       <section className="bg-slate-800 text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Grow Your Business?</h2>
