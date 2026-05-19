@@ -28,7 +28,7 @@ function TopBar() {
             <Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span>
           </a>
           <span className="flex items-center gap-2">
-            <MapPin className="w-4 h-4" /><span>Remote — Texas, USA</span>
+            <MapPin className="w-4 h-4" /><span>Remote</span>
           </span>
           <span className="flex items-center gap-2">
             <Clock className="w-4 h-4" /><span>Available 24/7</span>
@@ -131,7 +131,7 @@ function Footer() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2"><Phone className="w-4 h-4" /><span>+1 (331) 278-2900</span></li>
             <li className="flex items-center gap-2"><Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span></li>
-            <li className="flex items-center gap-2"><MapPin className="w-4 h-4" /><span>Remote — Texas, USA</span></li>
+            <li className="flex items-center gap-2"><MapPin className="w-4 h-4" /><span>Remote</span></li>
             <li className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>Available 24/7</span></li>
           </ul>
         </div>
