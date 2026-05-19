@@ -145,7 +145,7 @@ function HomePage() {
           <SectionTitle>OUR SERVICES</SectionTitle>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s) => (
-              <div key={s.title} className="bg-white rounded-xl border border-slate-200 p-8 text-center hover:shadow-lg transition">
+              <div key={s.title} className="bg-white rounded-xl border border-slate-200 p-8 text-center hover:shadow-lg transition hover-lift">
                 <div className="w-14 h-14 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
                   <s.icon className="w-7 h-7 text-blue-600" />
                 </div>
@@ -171,7 +171,7 @@ function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {problems.map((p) => (
-              <div key={p.title} className="bg-slate-800/60 border border-slate-700 rounded-xl p-6">
+              <div key={p.title} className="bg-slate-800/60 border border-slate-700 rounded-xl p-6 hover-lift">
                 <p.icon className="w-8 h-8 text-blue-400 mb-3" />
                 <h3 className="font-bold text-lg mb-2">{p.title}</h3>
                 <p className="text-sm text-slate-300 leading-relaxed">{p.desc}</p>
@@ -214,7 +214,7 @@ function HomePage() {
           <SectionTitle>FEATURED WORK</SectionTitle>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featured.map((f) => (
-              <a key={f.name} href={f.url} target="_blank" rel="noopener noreferrer" className="group bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition">
+              <a key={f.name} href={f.url} target="_blank" rel="noopener noreferrer" className="group bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition hover-lift">
                 <div className="h-48 overflow-hidden">
                   <img src={f.img} alt={f.name} className="w-full h-full object-cover group-hover:scale-105 transition" loading="lazy" />
                 </div>
@@ -305,7 +305,7 @@ function HomePage() {
           <SectionTitle>WHAT WE OFFER</SectionTitle>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {offers.map((o) => (
-              <div key={o.title} className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
+              <div key={o.title} className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover-lift">
                 <img src={o.img} alt={o.title} className="w-full h-48 object-cover" loading="lazy" />
                 <div className="p-6">
                   <h3 className="font-bold text-lg text-slate-800 mb-2">{o.title}</h3>
@@ -339,7 +339,7 @@ function HomePage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {expertise.map((e) => (
-              <div key={e.title} className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition">
+              <div key={e.title} className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition hover-lift">
                 <e.icon className="w-8 h-8 text-blue-600 mb-3" />
                 <h3 className="font-bold text-lg text-slate-800 mb-2">{e.title}</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">{e.desc}</p>
@@ -371,7 +371,7 @@ function HomePage() {
           <SectionTitle>LATEST INSIGHTS</SectionTitle>
           <div className="grid md:grid-cols-3 gap-6">
             {insights.map((i) => (
-              <Link key={i.slug} to="/blog" className="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition">
+              <Link key={i.slug} to="/blog" className="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition hover-lift">
                 <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
                   <span className="text-blue-600 font-semibold">{i.tag}</span>
                   <span>•</span>
