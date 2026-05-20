@@ -83,13 +83,13 @@ function ContactPage() {
           {/* Form */}
           <form onSubmit={onSubmit} className="bg-white rounded-xl border border-slate-200 p-6 md:p-8 space-y-4 shadow-sm">
             <div className="grid sm:grid-cols-2 gap-4">
-              <Field label="Name *"><input required type="text" placeholder="John Doe" className={inputCls} /></Field>
-              <Field label="Email *"><input required type="email" placeholder="john@example.com" className={inputCls} /></Field>
+              <Field label="Name *"><input name="name" required type="text" placeholder="John Doe" className={inputCls} /></Field>
+              <Field label="Email *"><input name="email" required type="email" placeholder="john@example.com" className={inputCls} /></Field>
             </div>
-            <Field label="Company"><input type="text" placeholder="Your Company" className={inputCls} /></Field>
+            <Field label="Company"><input name="company" type="text" placeholder="Your Company" className={inputCls} /></Field>
             <div className="grid sm:grid-cols-2 gap-4">
               <Field label="Service Needed *">
-                <select required className={inputCls} defaultValue="">
+                <select name="service" required className={inputCls} defaultValue="">
                   <option value="" disabled>Select a service</option>
                   <option>SEO Optimization</option>
                   <option>Web Development</option>
@@ -100,7 +100,7 @@ function ContactPage() {
                 </select>
               </Field>
               <Field label="Budget Range *">
-                <select required className={inputCls} defaultValue="">
+                <select name="budget" required className={inputCls} defaultValue="">
                   <option value="" disabled>Select budget</option>
                   <option>Under $1,000</option>
                   <option>$1,000 - $5,000</option>
@@ -110,7 +110,7 @@ function ContactPage() {
               </Field>
             </div>
             <Field label="Project Details *">
-              <textarea required rows={5} placeholder="Tell us about your project..." className={inputCls} />
+              <textarea name="message" required rows={5} placeholder="Tell us about your project..." className={inputCls} />
             </Field>
             <button type="submit" disabled={submitting} className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
               <Send className="w-4 h-4" /> {submitting ? "Sending..." : "Send Message"}
