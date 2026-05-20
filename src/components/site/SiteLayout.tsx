@@ -1,7 +1,50 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, Clock, MapPin, Menu, X, MessageCircle } from "lucide-react";
+import { Mail, Phone, Clock, MapPin, Menu, X, MessageCircle, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
+import { useScrollReveal } from "@/hooks/use-reveal";
+
+export const SOCIALS = {
+  linkedin: "https://www.linkedin.com/in/adam-bawa-aliyu-8463a93b2",
+  facebook: "https://www.facebook.com/bawaaliyuadams",
+  tiktok: "https://www.tiktok.com/@brainboxworld",
+  instagram: "https://www.instagram.com/brainboxproworld?igsh=aTNlNDNoaTkweXMx",
+  x: "https://x.com/Brainboxworld",
+};
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V9.05a8.16 8.16 0 0 0 4.93 1.55V7.16a4.78 4.78 0 0 1-2-.47z"/>
+    </svg>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2H21l-6.52 7.452L22 22h-6.828l-5.34-6.97L3.6 22H.84l6.974-7.97L1.5 2h6.99l4.83 6.39L18.244 2zm-1.196 18h1.82L7.04 4H5.1L17.048 20z"/>
+    </svg>
+  );
+}
+
+export const SocialLinks = ({ variant = "default" }: { variant?: "default" | "footer" }) => {
+  const base =
+    variant === "footer"
+      ? "w-10 h-10 rounded-full bg-white/5 hover:bg-blue-500 text-slate-300 hover:text-white border border-white/10"
+      : "w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-white hover:bg-blue-600 hover:border-blue-600";
+  const cls = `${base} flex items-center justify-center transition-all hover:scale-110 hover:-translate-y-0.5`;
+  return (
+    <div className="flex gap-3">
+      <a href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={cls}><Linkedin className="w-4 h-4" /></a>
+      <a href={SOCIALS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={cls}><Facebook className="w-4 h-4" /></a>
+      <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={cls}><Instagram className="w-4 h-4" /></a>
+      <a href={SOCIALS.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className={cls}><TikTokIcon className="w-4 h-4" /></a>
+      <a href={SOCIALS.x} target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className={cls}><XIcon className="w-4 h-4" /></a>
+    </div>
+  );
+};
+
 
 const desktopNavItems = [
   { label: "About", to: "/about", hash: undefined as string | undefined },
@@ -157,6 +200,10 @@ function Footer() {
             <li className="flex items-center gap-2"><MapPin className="w-4 h-4" /><span>Remote</span></li>
             <li className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>Available 24/7</span></li>
           </ul>
+          <div className="mt-5">
+            <h4 className="text-white font-semibold mb-3">Follow Us</h4>
+            <SocialLinks variant="footer" />
+          </div>
         </div>
       </div>
       <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-400">
@@ -181,6 +228,7 @@ export function WhatsAppFloat() {
 }
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
+  useScrollReveal();
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900">
       <TopBar />
@@ -194,10 +242,14 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
 
 export function PageHero({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <section className="bg-slate-800 text-white py-20 px-4">
-      <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
-        {subtitle && <p className="text-lg text-slate-300">{subtitle}</p>}
+    <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white py-20 px-4 overflow-hidden">
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 -left-10 w-72 h-72 bg-blue-500/30 rounded-full blur-3xl animate-blob" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-blob delay-300" />
+      </div>
+      <div className="relative max-w-4xl mx-auto text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-up">{title}</h1>
+        {subtitle && <p className="text-lg text-slate-300 animate-slide-up delay-200">{subtitle}</p>}
       </div>
     </section>
   );
