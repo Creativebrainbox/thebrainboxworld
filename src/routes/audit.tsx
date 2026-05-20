@@ -73,8 +73,8 @@ function AuditPage() {
             <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email address" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
             <input required type="url" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} placeholder="Your website URL" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
             <textarea value={form.goals} onChange={(e) => setForm({ ...form, goals: e.target.value })} rows={4} placeholder="What are your growth goals?" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
-            <button type="submit" className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">
-              Book My Free Audit
+            <button type="submit" disabled={submitting} className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold disabled:opacity-60 transition-all hover:scale-[1.02]">
+              {submitting ? "Sending..." : "Book My Free Audit"}
             </button>
           </form>
         </div>
