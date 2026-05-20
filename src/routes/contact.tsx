@@ -19,14 +19,33 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    const fd = new FormData(e.currentTarget);
+    const payload = {
+      name: String(fd.get('name') || ''),
+      email: String(fd.get('email') || ''),
+      company: String(fd.get('company') || ''),
+      service: String(fd.get('service') || ''),
+      budget: String(fd.get('budget') || ''),
+      message: String(fd.get('message') || ''),
+      source: 'contact',
+    };
+    try {
+      const res = await fetch('/api/public/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error('Failed');
       (e.target as HTMLFormElement).reset();
       toast.success("Message sent! We'll get back to you shortly.");
-    }, 600);
+    } catch {
+      toast.error("Something went wrong. Please try again or WhatsApp us.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
