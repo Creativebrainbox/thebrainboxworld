@@ -1,8 +1,16 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, Clock, MapPin, Menu, X, MessageCircle, Facebook, Instagram, Linkedin } from "lucide-react";
-import { useState } from "react";
+import {
+  Mail, Phone, Clock, MapPin, Menu, X, MessageCircle, Send,
+  Facebook, Instagram, Linkedin, Sparkles, CalendarCheck, ArrowRight,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import { useScrollReveal } from "@/hooks/use-reveal";
+
+export const WHATSAPP_NUMBER = "13312782900";
+export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
+export const CALENDLY_LINK = "https://calendly.com/brainboxworld/30min";
+export const CONTACT_EMAIL = "info@brainboxworld.dedyn.io";
 
 export const SOCIALS = {
   linkedin: "https://www.linkedin.com/in/adam-bawa-aliyu-8463a93b2",
@@ -19,7 +27,6 @@ function TikTokIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function XIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
@@ -29,11 +36,8 @@ function XIcon({ className }: { className?: string }) {
 }
 
 export const SocialLinks = ({ variant = "default" }: { variant?: "default" | "footer" }) => {
-  const base =
-    variant === "footer"
-      ? "w-10 h-10 rounded-full bg-white/5 hover:bg-blue-500 text-slate-300 hover:text-white border border-white/10"
-      : "w-10 h-10 rounded-full bg-white border border-slate-200 text-slate-600 hover:text-white hover:bg-blue-600 hover:border-blue-600";
-  const cls = `${base} flex items-center justify-center transition-all hover:scale-110 hover:-translate-y-0.5`;
+  const cls =
+    "w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-500 text-slate-300 hover:text-white border border-white/10 hover:border-indigo-400 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(79,70,229,0.7)]";
   return (
     <div className="flex gap-3">
       <a href={SOCIALS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className={cls}><Linkedin className="w-4 h-4" /></a>
@@ -45,14 +49,13 @@ export const SocialLinks = ({ variant = "default" }: { variant?: "default" | "fo
   );
 };
 
-
 const desktopNavItems = [
-  { label: "About", to: "/about", hash: undefined as string | undefined },
+  { label: "About", to: "/", hash: undefined as string | undefined },
   { label: "Services", to: "/", hash: "services" },
   { label: "Portfolio", to: "/portfolio", hash: undefined },
   { label: "Case Studies", to: "/case-studies", hash: undefined },
-  { label: "Blog", to: "/blog", hash: undefined },
-  { label: "Packages", to: "/packages", hash: undefined },
+  { label: "Pricing", to: "/packages", hash: undefined },
+  { label: "Insights", to: "/blog", hash: undefined },
   { label: "Contact", to: "/contact", hash: undefined },
 ];
 
@@ -62,30 +65,26 @@ const mobileNavItems = [
   { label: "SERVICES", to: "/", hash: "services" },
   { label: "PORTFOLIO", to: "/portfolio", hash: undefined },
   { label: "CASE STUDIES", to: "/case-studies", hash: undefined },
-  { label: "BLOG", to: "/blog", hash: undefined },
-  { label: "PACKAGES", to: "/packages", hash: undefined },
+  { label: "TESTIMONIALS", to: "/", hash: "testimonials" },
+  { label: "PRICING", to: "/packages", hash: undefined },
+  { label: "INSIGHTS", to: "/blog", hash: undefined },
   { label: "AUDIT", to: "/audit", hash: undefined },
   { label: "CONTACT", to: "/contact", hash: undefined },
 ];
 
-
 function TopBar() {
   return (
-    <div className="bg-slate-900 text-slate-200 text-xs sm:text-sm animate-fade-in">
-      <div className="max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap justify-between items-center gap-2">
-        <a href="https://wa.me/13312782900" className="flex items-center gap-2 hover:text-white transition-colors">
-          <Phone className="w-4 h-4" /><span>WhatsApp: +1 (331) 278-2900</span>
+    <div className="hidden md:block bg-[#0a0a1a] text-slate-400 text-xs border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center gap-4">
+        <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-300 transition-colors">
+          <Phone className="w-3.5 h-3.5" /><span>+1 (331) 278-2900</span>
         </a>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
-          <a href="mailto:info@brainboxworld.dedyn.io" className="flex items-center gap-2 hover:text-white transition-colors">
-            <Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-2 hover:text-indigo-300 transition-colors">
+            <Mail className="w-3.5 h-3.5" /><span>{CONTACT_EMAIL}</span>
           </a>
-          <span className="flex items-center gap-2">
-            <MapPin className="w-4 h-4" /><span>Remote</span>
-          </span>
-          <span className="flex items-center gap-2">
-            <Clock className="w-4 h-4" /><span>Available 24/7</span>
-          </span>
+          <span className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5" /><span>Remote</span></span>
+          <span className="flex items-center gap-2"><Clock className="w-3.5 h-3.5" /><span>Available 24/7</span></span>
         </div>
       </div>
     </div>
@@ -94,69 +93,93 @@ function TopBar() {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="bg-white border-b sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <header
+      className={`sticky top-0 z-40 transition-all duration-500 ${
+        scrolled
+          ? "bg-[#0a0a1a]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)]"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-3 group" onClick={() => setOpen(false)}>
-          <img
-            src={logo}
-            alt="BrainBoxWorld logo"
-            className="w-11 h-11 object-contain transition-transform duration-500 group-hover:rotate-[360deg] group-hover:scale-110"
-          />
-          <span className="text-lg sm:text-xl font-bold tracking-wide">
-            <span className="text-blue-600">BRAIN</span>
-            <span className="text-slate-800">BOXWORLD</span>
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-indigo-500 via-violet-500 to-cyan-400 opacity-60 blur-md group-hover:opacity-100 transition-opacity" />
+            <img
+              src={logo}
+              alt="BrainBoxWorld logo"
+              className="relative w-10 h-10 object-contain rounded-full bg-[#0a0a1a] p-0.5 transition-transform duration-700 group-hover:rotate-[360deg]"
+            />
+          </div>
+          <span className="text-lg sm:text-xl font-bold tracking-tight font-display">
+            <span className="text-gradient">BRAIN</span>
+            <span className="text-white">BOXWORLD</span>
           </span>
         </Link>
-        <nav className="hidden md:flex items-center gap-5 lg:gap-6">
+
+        <nav className="hidden lg:flex items-center gap-1">
           {desktopNavItems.map((item) => (
             <Link
               key={item.label}
               to={item.to}
               hash={item.hash}
-              className="text-sm font-medium text-slate-700 hover:text-blue-600 transition-colors story-link"
-              activeOptions={{ exact: true, includeHash: false }}
-              activeProps={{ className: "text-sm font-medium text-blue-600" }}
+              className="relative px-3 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors story-link"
             >
               {item.label}
             </Link>
           ))}
-          <Link
-            to="/audit"
-            className="ml-1 inline-flex items-center bg-slate-900 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-all hover:scale-105 hover:shadow-lg"
+          <a
+            href={CALENDLY_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-3 group relative inline-flex items-center gap-2 btn-premium text-sm font-semibold px-5 py-2.5 rounded-full"
           >
-            Book an Audit
-          </Link>
+            <CalendarCheck className="w-4 h-4" />
+            Book a 30-min Call
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+          </a>
         </nav>
+
         <button
-          className="md:hidden p-2 text-slate-700 transition-transform hover:scale-110"
+          className="lg:hidden p-2 text-slate-200 transition-transform hover:scale-110"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
+
       {open && (
-        <nav className="md:hidden border-t bg-white animate-fade-in">
-          <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
+        <nav className="lg:hidden border-t border-white/10 glass-strong animate-fade-in">
+          <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
             {mobileNavItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.to}
                 hash={item.hash}
                 onClick={() => setOpen(false)}
-                className="text-sm font-semibold text-slate-700 hover:text-blue-600 hover:translate-x-1 transition-all py-2"
+                className="text-sm font-semibold tracking-wide text-slate-200 hover:text-white hover:translate-x-1 transition-all py-2.5 border-b border-white/5"
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              to="/audit"
+            <a
+              href={CALENDLY_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex justify-center bg-slate-900 hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors"
+              className="mt-3 inline-flex justify-center items-center gap-2 btn-premium text-sm font-semibold px-4 py-3 rounded-full"
             >
-              Book an Audit
-            </Link>
+              <CalendarCheck className="w-4 h-4" /> Book a 30-min Call
+            </a>
           </div>
         </nav>
       )}
@@ -166,90 +189,208 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300 mt-20">
-      <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-10">
-        <div>
-          <div className="flex items-center gap-3 mb-4">
-            <img src={logo} alt="BrainBoxWorld logo" className="w-11 h-11 object-contain bg-white/5 rounded-full p-1" />
-            <span className="text-lg font-bold text-white">
-              BRAIN<span className="text-blue-400">BOXWORLD</span>
+    <footer className="relative mt-24 border-t border-white/10 bg-[#0a0a1a] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-blob" />
+        <div className="absolute -bottom-40 right-1/4 w-[28rem] h-[28rem] bg-violet-600/15 rounded-full blur-3xl animate-blob delay-300" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-4">
+          <div className="flex items-center gap-3 mb-5">
+            <img src={logo} alt="BrainBoxWorld logo" className="w-11 h-11 object-contain bg-white/5 rounded-full p-1 border border-white/10" />
+            <span className="text-xl font-bold font-display text-white">
+              BRAIN<span className="text-gradient">BOXWORLD</span>
             </span>
           </div>
-          <p className="text-sm leading-relaxed">
-            Professional Digital Marketing & SEO Services helping businesses achieve top Google rankings.
+          <p className="text-sm leading-relaxed text-slate-400 max-w-sm">
+            Your trusted partner for modern digital solutions — websites, AI, automation, and growth systems engineered to scale.
           </p>
+          <div className="mt-6"><SocialLinks variant="footer" /></div>
         </div>
-        <div>
-          <h4 className="text-white font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/" className="hover:text-white story-link">Home</Link></li>
-            <li><Link to="/about" className="hover:text-white story-link">About</Link></li>
-            <li><Link to="/portfolio" className="hover:text-white story-link">Portfolio</Link></li>
-            <li><Link to="/case-studies" className="hover:text-white story-link">Case Studies</Link></li>
-            <li><Link to="/blog" className="hover:text-white story-link">Blog</Link></li>
-            <li><Link to="/packages" className="hover:text-white story-link">Packages</Link></li>
-            <li><Link to="/audit" className="hover:text-white story-link">Free Audit</Link></li>
-            <li><Link to="/contact" className="hover:text-white story-link">Contact</Link></li>
+
+        <div className="lg:col-span-2">
+          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">EXPLORE</h4>
+          <ul className="space-y-2.5 text-sm text-slate-400">
+            <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
+            <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
+            <li><Link to="/portfolio" className="hover:text-white transition-colors">Portfolio</Link></li>
+            <li><Link to="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
+            <li><Link to="/blog" className="hover:text-white transition-colors">Insights</Link></li>
           </ul>
         </div>
-        <div>
-          <h4 className="text-white font-semibold mb-4">Contact</h4>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4" /><span>+1 (331) 278-2900</span></li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4" /><span>info@brainboxworld.dedyn.io</span></li>
-            <li className="flex items-center gap-2"><MapPin className="w-4 h-4" /><span>Remote</span></li>
-            <li className="flex items-center gap-2"><Clock className="w-4 h-4" /><span>Available 24/7</span></li>
+
+        <div className="lg:col-span-2">
+          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">COMPANY</h4>
+          <ul className="space-y-2.5 text-sm text-slate-400">
+            <li><Link to="/packages" className="hover:text-white transition-colors">Pricing</Link></li>
+            <li><Link to="/audit" className="hover:text-white transition-colors">Free Audit</Link></li>
+            <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+            <li><a href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Book a Call</a></li>
           </ul>
-          <div className="mt-5">
-            <h4 className="text-white font-semibold mb-3">Follow Us</h4>
-            <SocialLinks variant="footer" />
-          </div>
+        </div>
+
+        <div className="lg:col-span-4">
+          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">GET IN TOUCH</h4>
+          <ul className="space-y-3 text-sm text-slate-300">
+            <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-indigo-400" /><a href={WHATSAPP_LINK} className="hover:text-white">+1 (331) 278-2900</a></li>
+            <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-indigo-400" /><a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white">{CONTACT_EMAIL}</a></li>
+            <li className="flex items-center gap-3"><MapPin className="w-4 h-4 text-indigo-400" /><span>Remote · Global</span></li>
+            <li className="flex items-center gap-3"><Clock className="w-4 h-4 text-indigo-400" /><span>Available 24/7</span></li>
+          </ul>
+          <a
+            href={CALENDLY_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 btn-premium text-sm font-semibold px-5 py-3 rounded-full"
+          >
+            <Sparkles className="w-4 h-4" /> Book a Strategy Call
+          </a>
         </div>
       </div>
-      <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-400">
-        © {new Date().getFullYear()} BrainBoxWorld. All rights reserved.
+
+      <div className="relative border-t border-white/10 py-5 text-center text-xs text-slate-500">
+        © {new Date().getFullYear()} BrainBoxWorld. Crafted with precision. All rights reserved.
       </div>
     </footer>
   );
 }
 
-export function WhatsAppFloat() {
+/** Premium floating live chat that hands off to WhatsApp. */
+export function LiveChatWidget() {
+  const [open, setOpen] = useState(false);
+  const [draft, setDraft] = useState("");
+
+  const sendToWhatsApp = (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    const url = `${WHATSAPP_LINK}?text=${encodeURIComponent(trimmed)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    setDraft("");
+  };
+
+  const quickActions = [
+    { label: "💬  Talk to Sales", msg: "Hi BrainBoxWorld — I'd like to talk to sales about a new project." },
+    { label: "🛠  Technical Support", msg: "Hi BrainBoxWorld — I need technical support with my project." },
+    { label: "📅  Book a Call", msg: "Hi BrainBoxWorld — I'd like to book a 30-minute strategy call." },
+    { label: "👀  Just Browsing", msg: "Hi BrainBoxWorld — just exploring your services." },
+  ];
+
   return (
-    <a
-      href="https://wa.me/13312782900"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center shadow-lg z-50 animate-fade-in hover:scale-110 transition-transform before:absolute before:inset-0 before:rounded-full before:bg-green-400 before:animate-ping before:-z-10"
-      aria-label="Contact on WhatsApp"
-    >
-      <MessageCircle className="w-7 h-7" />
-    </a>
+    <>
+      {/* Toggle button */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="Open live chat"
+        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full btn-premium flex items-center justify-center animate-pulse-glow group"
+      >
+        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
+        </span>
+        {open ? <X className="w-7 h-7 text-white" /> : <MessageCircle className="w-7 h-7 text-white transition-transform group-hover:scale-110" />}
+      </button>
+
+      {/* Panel */}
+      {open && (
+        <div className="fixed bottom-28 right-6 z-50 w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+          <div className="relative p-5 bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-700 text-white overflow-hidden">
+            <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+            <div className="relative flex items-center gap-3">
+              <div className="relative">
+                <img src={logo} alt="BrainBoxWorld" className="w-10 h-10 rounded-full bg-white/10 p-0.5 border border-white/20" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-indigo-700" />
+              </div>
+              <div>
+                <div className="font-semibold">BrainBoxWorld Team</div>
+                <div className="text-xs text-indigo-100 flex items-center gap-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-300" /> Online — replies in minutes
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 space-y-3 max-h-[22rem] overflow-y-auto bg-[#0a0a1a]/70">
+            <div className="flex gap-2">
+              <img src={logo} alt="" className="w-7 h-7 rounded-full bg-white/5 p-0.5 border border-white/10 flex-shrink-0" />
+              <div className="bg-white/5 border border-white/10 rounded-2xl rounded-tl-sm px-3 py-2 text-sm text-slate-200 max-w-[80%]">
+                👋 Hi there! How can we help you today? Pick a topic or send us a message — we'll continue on WhatsApp.
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 pt-1">
+              {quickActions.map((a) => (
+                <button
+                  key={a.label}
+                  onClick={() => sendToWhatsApp(a.msg)}
+                  className="text-left text-sm px-3 py-2.5 rounded-xl bg-white/5 hover:bg-indigo-500/20 border border-white/10 hover:border-indigo-400/50 text-slate-200 transition-all hover:translate-x-1"
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <form
+            onSubmit={(e) => { e.preventDefault(); sendToWhatsApp(draft || "Hi BrainBoxWorld!"); }}
+            className="flex items-center gap-2 p-3 border-t border-white/10 bg-[#0a0a1a]"
+          >
+            <input
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              placeholder="Type your message…"
+              className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-400/60"
+            />
+            <button
+              type="submit"
+              className="w-10 h-10 rounded-full btn-premium flex items-center justify-center flex-shrink-0"
+              aria-label="Send via WhatsApp"
+            >
+              <Send className="w-4 h-4 text-white" />
+            </button>
+          </form>
+          <div className="text-[10px] text-center text-slate-500 pb-2 bg-[#0a0a1a]">Conversations continue on WhatsApp · Secure & private</div>
+        </div>
+      )}
+    </>
   );
 }
+
+/** Backwards-compatible export kept for other pages that imported it. */
+export const WhatsAppFloat = LiveChatWidget;
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   useScrollReveal();
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[#0a0a1a] text-slate-100 selection:bg-indigo-500/40">
       <TopBar />
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
-      <WhatsAppFloat />
+      <LiveChatWidget />
     </div>
   );
 }
 
 export function PageHero({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white py-20 px-4 overflow-hidden">
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 -left-10 w-72 h-72 bg-blue-500/30 rounded-full blur-3xl animate-blob" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl animate-blob delay-300" />
-      </div>
-      <div className="relative max-w-4xl mx-auto text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 animate-slide-up">{title}</h1>
-        {subtitle && <p className="text-lg text-slate-300 animate-slide-up delay-200">{subtitle}</p>}
+    <section className="relative overflow-hidden border-b border-white/5">
+      <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
+      <div className="absolute inset-0 bg-grid opacity-50" />
+      <div className="absolute -top-20 -left-20 w-72 h-72 bg-indigo-500/30 rounded-full blur-3xl animate-blob" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/25 rounded-full blur-3xl animate-blob delay-300" />
+      <div className="relative max-w-5xl mx-auto text-center px-4 py-24 md:py-32">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 mb-6 animate-fade-in">
+          <Sparkles className="w-3.5 h-3.5" /> BRAINBOXWORLD
+        </div>
+        <h1 className="text-4xl md:text-6xl font-bold font-display animate-slide-up">
+          <span className="text-gradient">{title}</span>
+        </h1>
+        {subtitle && (
+          <p className="mt-5 text-lg md:text-xl text-slate-300 max-w-2xl mx-auto animate-slide-up delay-200">
+            {subtitle}
+          </p>
+        )}
       </div>
     </section>
   );

@@ -1,410 +1,567 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteLayout } from "@/components/site/SiteLayout";
+import { SiteLayout, CALENDLY_LINK, WHATSAPP_LINK } from "@/components/site/SiteLayout";
+import { useEffect, useRef, useState } from "react";
 import {
-  Code2, Share2, Palette, MonitorSmartphone, Search, ShieldCheck, Check, ArrowRight,
-  AlertTriangle, TrendingDown, Layers, Compass, BarChart3, Rocket,
-  Target, Sparkles, LineChart, Smartphone, Quote,
+  Code2, Palette, ShoppingCart, BrainCog, TrendingUp, Smartphone, Headphones,
+  Sparkles, ArrowRight, ArrowUpRight, Check, Star, Quote, CalendarCheck,
+  Rocket, Target, Layers, LineChart, ShieldCheck, Zap, Globe2, MessageSquare,
 } from "lucide-react";
-
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BrainBoxWorld — Professional Digital Marketing & SEO Services" },
-      { name: "description", content: "Professional Digital Marketing & SEO Services. We help businesses achieve first-page Google rankings, boost organic traffic, and grow conversions." },
-      { property: "og:title", content: "BrainBoxWorld — Professional Digital Marketing & SEO Services" },
-      { property: "og:description", content: "High quality SEO and web development services for Shopify, WordPress, Bigcommerce, Wix, Joomla & Magento." },
+      { title: "BrainBoxWorld — Modern Digital Solutions, AI, Automation & Growth" },
+      { name: "description", content: "BrainBoxWorld builds high-performance websites, AI systems, automation, and growth-focused digital experiences. Book a 30-minute strategy call." },
+      { property: "og:title", content: "BrainBoxWorld — Modern Digital Solutions" },
+      { property: "og:description", content: "Websites, apps, AI, automation, and growth systems that scale. Book a 30-minute strategy call." },
     ],
   }),
   component: HomePage,
 });
 
-const services = [
-  { icon: Code2, title: "Web Development", desc: "We provide the best custom website development solutions for you. Our web design services are loved by startup's, businesses and organizations." },
-  { icon: Share2, title: "Social Media Marketing", desc: "Social media marketing is a powerful way for businesses of all sizes to reach prospects and customers. We will Grow brand awareness, engagement & traffic." },
-  { icon: Palette, title: "Web Designing", desc: "We help you craft a responsive website design that will be compatible on all devices through our effective mobile and web development services." },
-  { icon: MonitorSmartphone, title: "Search Engine Marketing", desc: "Search Engine Marketing is the process of gaining website traffic and visibility in search engines through the efforts of Pay-Per-Click advertising." },
-  { icon: Search, title: "Search Engine Optimization", desc: "We offer Search Engine Optimization services to clients. We will improve Google, Yahoo, Bing etc first page ranking results & boost website traffic." },
-  { icon: ShieldCheck, title: "Reputation Management", desc: "Create a positive image about your brand or product & protect your brand on the internet. We offer results online reputation management services." },
-];
+/* ----------------------------- DATA ----------------------------- */
 
-const featured = [
-  { name: "retrospec.com", cat: "E-commerce", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop", url: "https://retrospec.com/" },
-  { name: "darntough.com", cat: "Apparel", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=300&fit=crop", url: "https://darntough.com/" },
-  { name: "trnda.com", cat: "Fashion", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop", url: "https://trnda.com/" },
-  { name: "weightliftinghouse.com", cat: "Sports Equipment", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop", url: "https://ukstore.weightliftinghouse.com/" },
-  { name: "goondiwindicotton.com.au", cat: "Cotton Products", img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&h=300&fit=crop", url: "https://goondiwindicotton.com.au/" },
-  { name: "shopbenetek.com", cat: "Retail", img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&h=300&fit=crop", url: "https://shopbenetek.com/" },
-  { name: "thelandmarkproject.com", cat: "Adventure Gear", img: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=300&fit=crop", url: "https://thelandmarkproject.com/" },
+const techGroups = [
+  { group: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Webflow", "Framer"] },
+  { group: "Backend", items: ["Node.js", "TypeScript", "MongoDB", "PostgreSQL", "Firebase"] },
+  { group: "AI & Automation", items: ["OpenAI", "Zapier", "n8n", "LangChain"] },
+  { group: "E-Commerce", items: ["Shopify", "WooCommerce", "Stripe", "WordPress"] },
+  { group: "Analytics", items: ["Google Analytics", "Mixpanel", "Hotjar"] },
+  { group: "Cloud", items: ["AWS", "Vercel", "Cloudflare"] },
+  { group: "Design", items: ["Figma", "Adobe XD"] },
 ];
-
-const offers = [
-  { title: "Search Engine Optimization", desc: "We offer Search Engine Optimization services to clients. We will improve Google, Yahoo, Bing etc first page ranking results & boost website traffic.", img: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=500&h=300&fit=crop" },
-  { title: "Search Engine Marketing", desc: "Search Engine Marketing is the process of gaining website traffic and visibility in search engines through the efforts of Pay-Per-Click advertising.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop" },
-  { title: "Social Media Marketing", desc: "Social media marketing is a powerful way for businesses of all sizes to reach prospects and customers. We will Grow brand awareness, engagement & traffic.", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop" },
-  { title: "Web Designing", desc: "We help you craft a responsive website design that will be compatible on all devices through our effective mobile and web development services.", img: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&h=300&fit=crop" },
-  { title: "Reputation Management", desc: "Create a positive image about your brand or product & protect your brand on the internet. We offer results online reputation management services.", img: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=500&h=300&fit=crop" },
-  { title: "Web Development", desc: "We provide the best custom website development solutions for you. Our web design services are loved by startup's, businesses and organizations.", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=300&fit=crop" },
-];
-
-const problems = [
-  { icon: TrendingDown, title: "Traffic Has Plateaued", desc: "You've hit a ceiling and can't figure out what's broken in your growth engine." },
-  { icon: AlertTriangle, title: "Conversions Are Declining", desc: "Visitors are landing on your site but they aren't converting — the funnel is leaking." },
-  { icon: Layers, title: "Fragmented Tech Stack", desc: "Apps, tools, and integrations are duct-taped together with no cohesive system." },
-  { icon: Compass, title: "No Strategic Clarity", desc: "You're making tactical moves without a roadmap, clear priorities, or reliable data." },
-  { icon: BarChart3, title: "Poor Tracking & Visibility", desc: "You can't attribute revenue or measure performance with your current setup." },
-  { icon: Rocket, title: "Scaling Before Foundation", desc: "You're pouring into ads while the site itself underperforms and leaks margin." },
-];
-
-const approach = [
-  "Diagnostic-led methodology",
-  "Conversion-focused execution",
-  "Scalable growth infrastructure",
-  "Data-driven decision making",
-];
+const techMarquee = techGroups.flatMap((g) => g.items);
 
 const stats = [
-  { value: "250+", label: "Projects Delivered" },
-  { value: "180%", label: "Avg. Traffic Lift" },
-  { value: "$25M+", label: "Revenue Influenced" },
-  { value: "98%", label: "Client Satisfaction" },
+  { value: 250, suffix: "+", label: "Projects Delivered" },
+  { value: 180, suffix: "%", label: "Avg. Growth Increase" },
+  { value: 25, suffix: "M+", prefix: "$", label: "Revenue Influenced" },
+  { value: 98, suffix: "%", label: "Client Satisfaction" },
 ];
 
-const expertise = [
-  { icon: Target, title: "SEO Strategy", desc: "Technical SEO and on-page architecture that turn search visibility into qualified traffic and revenue." },
-  { icon: Sparkles, title: "Brand Experience Design", desc: "Visual identity and UX that communicate value and build emotional connection with your audience." },
-  { icon: LineChart, title: "Growth Systems", desc: "Data-driven frameworks that identify bottlenecks and create compounding growth across channels." },
-  { icon: Search, title: "Content & Organic Growth", desc: "Content architecture and editorial strategies that drive qualified traffic without ad dependency." },
-  { icon: Code2, title: "Custom Development", desc: "Shopify, WordPress, Webflow and custom builds engineered for performance and scale." },
-  { icon: Smartphone, title: "Mobile Optimization", desc: "Mobile-first design and performance work that captures the 70%+ of traffic shopping on phones." },
+const whyUs = [
+  { icon: Target, title: "Conversion-Focused Design", desc: "Every pixel engineered to move visitors from interest to action." },
+  { icon: BrainCog, title: "AI-Powered Solutions", desc: "Smart automations and intelligent systems that work while you sleep." },
+  { icon: TrendingUp, title: "Growth-Driven Development", desc: "Built for compounding returns, not vanity metrics." },
+  { icon: Layers, title: "Scalable Architecture", desc: "Foundations that hold up at 10×, 100× and beyond." },
+  { icon: Zap, title: "High-Performance Systems", desc: "Sub-second loads, native-feel interactions, edge delivery." },
+  { icon: ShieldCheck, title: "Future-Proof Tech", desc: "Modern stacks chosen for longevity, not hype cycles." },
+  { icon: Rocket, title: "Automation-Driven Workflows", desc: "We replace manual work with elegant, observable pipelines." },
+  { icon: Sparkles, title: "Modern User Experiences", desc: "Premium UX that earns trust in the first 3 seconds." },
+];
+
+const services = [
+  {
+    icon: Code2, title: "Web & Software Development",
+    items: ["Websites", "Custom Web Apps", "SaaS Platforms", "API Development", "Dashboards", "CMS"],
+    desc: "Full-stack engineering for sites, apps and platforms that scale.",
+  },
+  {
+    icon: Palette, title: "UI/UX & Branding",
+    items: ["Product Design", "Wireframes & Prototypes", "Brand Identity", "Motion Graphics"],
+    desc: "Design systems and brand experiences that look as good as they perform.",
+  },
+  {
+    icon: ShoppingCart, title: "E-Commerce & Business Systems",
+    items: ["Shopify", "WooCommerce", "Payments", "Checkout Optimization", "Store Optimization"],
+    desc: "Stores engineered for conversion, retention and revenue growth.",
+  },
+  {
+    icon: BrainCog, title: "AI & Automation",
+    items: ["AI Chatbots", "Workflow Automation", "CRM Integration", "AI Features", "Dashboards"],
+    desc: "Smart systems that automate operations and unlock new revenue.",
+  },
+  {
+    icon: TrendingUp, title: "Digital Growth",
+    items: ["SEO", "Technical SEO", "CRO", "Analytics", "Performance Optimization"],
+    desc: "Data-led growth engineering across acquisition, activation and retention.",
+  },
+  {
+    icon: Smartphone, title: "Mobile & Cloud",
+    items: ["Mobile Apps", "Firebase", "Cloud Deployment", "DevOps Setup"],
+    desc: "Native-grade mobile and resilient cloud infrastructure.",
+  },
+  {
+    icon: Headphones, title: "Support & Consulting",
+    items: ["Maintenance", "Redesign", "Hosting", "MVP Development", "Consultation"],
+    desc: "Ongoing care, advisory and rapid MVP launches for ambitious teams.",
+  },
+];
+
+const portfolio = [
+  { name: "Mimi & Co.", cat: "E-Commerce · Fashion", img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&h=600&fit=crop", url: "https://mimiandco.com.au" },
+  { name: "Retrospec", cat: "DTC · Outdoor", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=900&h=600&fit=crop", url: "https://retrospec.com/" },
+  { name: "Darn Tough", cat: "Apparel · Heritage", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=900&h=600&fit=crop", url: "https://darntough.com/" },
+  { name: "Trnda", cat: "Fashion · Lifestyle", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&h=600&fit=crop", url: "https://trnda.com/" },
+  { name: "Weightlifting House", cat: "Sports Equipment", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&h=600&fit=crop", url: "https://ukstore.weightliftinghouse.com/" },
+  { name: "Goondiwindi Cotton", cat: "Heritage · Cotton", img: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=900&h=600&fit=crop", url: "https://goondiwindicotton.com.au/" },
+  { name: "Benetek", cat: "Retail · Lifestyle", img: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=900&h=600&fit=crop", url: "https://shopbenetek.com/" },
+  { name: "The Landmark Project", cat: "Adventure Gear", img: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=900&h=600&fit=crop", url: "https://thelandmarkproject.com/" },
 ];
 
 const testimonials = [
-  { quote: "BrainBoxWorld didn't just optimize our site — they rebuilt our entire growth engine. Organic traffic doubled within 90 days.", author: "Founder, Retrospec" },
-  { quote: "The strategic clarity they brought was unlike any agency we've worked with. Every decision was backed by data.", author: "CEO, Darn Tough" },
-  { quote: "They understood our positioning instantly. The new experience converts like nothing we had before.", author: "Marketing Lead, Trnda" },
-  { quote: "Our revenue tripled after they rebuilt our SEO and product discovery system. The ROI has been extraordinary.", author: "Co-Founder, Benetek" },
+  { quote: "BrainBoxWorld didn't just optimize our site — they rebuilt our entire growth engine. Organic traffic doubled within 90 days.", author: "Sarah Chen", role: "Founder, Retrospec", rating: 5 },
+  { quote: "The strategic clarity they brought was unlike any agency we've worked with. Every decision was backed by data.", author: "Marcus Reyes", role: "CEO, Darn Tough", rating: 5 },
+  { quote: "They understood our positioning instantly. The new experience converts like nothing we had before.", author: "Amara Okafor", role: "Marketing Lead, Trnda", rating: 5 },
+  { quote: "Our revenue tripled after they rebuilt our SEO and product discovery system. The ROI has been extraordinary.", author: "James Whitaker", role: "Co-Founder, Benetek", rating: 5 },
+];
+
+const workflow = [
+  { step: "01", title: "Discovery", desc: "Stakeholder interviews, audits, market & data deep-dive." },
+  { step: "02", title: "Strategy", desc: "Positioning, roadmap, KPI architecture and growth thesis." },
+  { step: "03", title: "Design", desc: "Premium UX, brand systems and high-fidelity prototypes." },
+  { step: "04", title: "Development", desc: "Engineering, integrations and AI-powered automations." },
+  { step: "05", title: "Optimization", desc: "CRO, performance, accessibility, technical SEO." },
+  { step: "06", title: "Launch", desc: "Cinematic launch, monitoring and learning loops." },
+  { step: "07", title: "Growth", desc: "Continuous iteration to compound results over time." },
 ];
 
 const insights = [
-  { tag: "Conversion Optimization", read: "8 min read", title: "Why Your Site Isn't Converting (And the 7 Structural Fixes That Will)", date: "March 2026", slug: "site-not-converting-7-structural-fixes" },
+  { tag: "Conversion", read: "8 min read", title: "Why Your Site Isn't Converting (And the 7 Structural Fixes That Will)", date: "March 2026", slug: "site-not-converting-7-structural-fixes" },
   { tag: "SEO & AI", read: "10 min read", title: "The AI-Powered SEO Framework for eCommerce Brands in 2026", date: "March 2026", slug: "ai-powered-seo-framework-2026" },
-  { tag: "Technical Strategy", read: "7 min read", title: "Shopify 2.0 vs Custom Build: Which Architecture Scales Better?", date: "February 2026", slug: "shopify-2-vs-custom-build" },
+  { tag: "Architecture", read: "7 min read", title: "Shopify 2.0 vs Custom Build: Which Architecture Scales Better?", date: "February 2026", slug: "shopify-2-vs-custom-build" },
 ];
 
+/* ----------------------------- HELPERS ----------------------------- */
 
-function SectionTitle({ children }: { children: React.ReactNode }) {
+function AnimatedCounter({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const duration = 1800;
+          const start = performance.now();
+          const tick = (t: number) => {
+            const p = Math.min(1, (t - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setN(Math.round(eased * value));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [value]);
+  return <span ref={ref}>{prefix}{n}{suffix}</span>;
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-center mb-12">
-      <h2 className="text-3xl md:text-4xl font-bold text-slate-800 tracking-wide">{children}</h2>
-      <div className="w-16 h-1 bg-blue-600 mx-auto mt-3 rounded-full" />
+    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-[0.2em] text-indigo-200 font-medium">
+      <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+      {children}
     </div>
   );
 }
 
+function SectionHeading({ label, title, subtitle, align = "center" }: { label: string; title: React.ReactNode; subtitle?: string; align?: "center" | "left" }) {
+  const alignCls = align === "center" ? "text-center items-center" : "text-left items-start";
+  return (
+    <div className={`flex flex-col ${alignCls} max-w-3xl ${align === "center" ? "mx-auto" : ""} mb-14 reveal`}>
+      <SectionLabel>{label}</SectionLabel>
+      <h2 className="mt-5 text-3xl md:text-5xl font-bold font-display tracking-tight">{title}</h2>
+      {subtitle && <p className="mt-4 text-slate-400 text-base md:text-lg leading-relaxed">{subtitle}</p>}
+    </div>
+  );
+}
+
+/* ----------------------------- PAGE ----------------------------- */
+
 function HomePage() {
   return (
     <SiteLayout>
-      {/* Hero */}
-      <section
-        className="relative text-white"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.85)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600&h=900&fit=crop')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 py-24 md:py-32">
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-3xl">
-            Professional Digital Marketing & SEO Services
-          </h1>
-          <p className="mt-6 text-lg text-slate-200 max-w-2xl">
-            We provide high quality Digital Marketing Services to grow your business online.
-            Highly experienced in SEO marketing for Shopify, WordPress, Bigcommerce, Wix, Joomla & Magento.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4 text-sm">
-            {["Boost Website Traffic", "First Page Google Rankings", "Increase Conversions", "Grow Organic Results"].map((t) => (
-              <span key={t} className="flex items-center gap-2"><Check className="w-4 h-4 text-green-400" /> {t}</span>
-            ))}
-          </div>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a href="https://wa.me/13312782900" className="px-6 py-3 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold">
-              Get Started
-            </a>
-            <Link to="/portfolio" className="px-6 py-3 rounded-full bg-white text-slate-800 hover:bg-slate-100 font-semibold">
-              Check Portfolios
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ====================== HERO ====================== */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
+        <div className="absolute inset-0 bg-grid opacity-50" />
+        <div className="absolute inset-0 bg-noise opacity-30 mix-blend-overlay" />
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl animate-blob" />
+        <div className="absolute top-1/3 right-0 w-[28rem] h-[28rem] bg-violet-600/25 rounded-full blur-3xl animate-blob delay-300" />
+        <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-blob delay-500" />
 
-      {/* Services */}
-      <section id="services" className="py-20 px-4 bg-slate-50 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>OUR SERVICES</SectionTitle>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s) => (
-              <div key={s.title} className="bg-white rounded-xl border border-slate-200 p-8 text-center hover:shadow-lg transition hover-lift">
-                <div className="w-14 h-14 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                  <s.icon className="w-7 h-7 text-blue-600" />
-                </div>
-                <h3 className="font-bold text-lg mb-3 text-slate-800">{s.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{s.desc}</p>
+        <div className="relative max-w-7xl mx-auto px-4 pt-20 md:pt-28 pb-20 md:pb-32">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 animate-fade-in">
+                <Sparkles className="w-3.5 h-3.5" />
+                Trusted by ambitious teams worldwide
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* The Problem */}
-      <section className="py-20 px-4 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-blue-400 font-semibold tracking-widest text-xs">THE PROBLEM</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 max-w-3xl mx-auto">
-              Most growth problems are structural — not traffic problems
-            </h2>
-            <p className="text-slate-300 mt-4 max-w-2xl mx-auto">
-              Growing brands hit walls not because they lack visitors, but because their site infrastructure can't support scale. Sound familiar?
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {problems.map((p) => (
-              <div key={p.title} className="bg-slate-800/60 border border-slate-700 rounded-xl p-6 hover-lift">
-                <p.icon className="w-8 h-8 text-blue-400 mb-3" />
-                <h3 className="font-bold text-lg mb-2">{p.title}</h3>
-                <p className="text-sm text-slate-300 leading-relaxed">{p.desc}</p>
+              <h1 className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-[1.05] tracking-tight">
+                <span className="block animate-slide-up">Your Trusted Partner</span>
+                <span className="block animate-slide-up delay-100">for{" "}
+                  <span className="text-gradient">Modern Digital</span>
+                </span>
+                <span className="block animate-slide-up delay-200">Solutions.</span>
+              </h1>
+
+              <p className="mt-8 text-base md:text-lg text-slate-300 max-w-2xl leading-relaxed animate-slide-up delay-300">
+                Looking to build a powerful website, launch a scalable platform, automate your business, or grow your digital presence?
+                At BrainBoxWorld, we craft high-performance digital experiences — from websites and branding to AI-powered systems,
+                automation, and scalable applications.
+              </p>
+
+              <div className="mt-10 flex flex-wrap gap-4 animate-slide-up delay-400">
+                <a href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 btn-premium text-sm font-semibold px-6 py-3.5 rounded-full">
+                  <CalendarCheck className="w-4 h-4" />
+                  Book a 30-Minute Call
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </a>
+                <Link to="/portfolio"
+                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-white/10 text-sm font-semibold text-white border border-white/10 hover:border-white/30 transition-all">
+                  View Our Work
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Our Approach */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-blue-600 font-semibold tracking-widest text-xs">OUR APPROACH</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-3 text-slate-800">
-              We think before we build. Then we build to scale.
-            </h2>
-            <p className="text-slate-600 mt-4 leading-relaxed">
-              Every engagement starts with diagnosis — not design. We map your growth architecture, identify structural friction, and build systems where strategy, design, technology and data reinforce each other.
-            </p>
-            <blockquote className="mt-6 border-l-4 border-blue-600 pl-4 italic text-slate-700">
-              "Most agencies build websites. We build growth systems. The difference is sustainable scale."
-            </blockquote>
-          </div>
-          <ul className="space-y-4">
-            {approach.map((a) => (
-              <li key={a} className="flex items-start gap-3 bg-slate-50 border border-slate-200 rounded-lg p-4">
-                <Check className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                <span className="font-semibold text-slate-800">{a}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+              <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-400 animate-fade-in delay-500">
+                {["Conversion-focused", "AI-powered", "Scalable", "Performance-first"].map((t) => (
+                  <span key={t} className="flex items-center gap-1.5">
+                    <Check className="w-3.5 h-3.5 text-emerald-400" /> {t}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-      {/* Featured Work */}
+            {/* Floating UI showcase */}
+            <div className="lg:col-span-5 relative h-[460px] hidden lg:block">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute w-72 h-72 rounded-full border border-indigo-500/20 animate-spin-slow" />
+                <div className="absolute w-96 h-96 rounded-full border border-violet-500/10 animate-spin-slow" style={{ animationDirection: "reverse" }} />
+              </div>
 
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>FEATURED WORK</SectionTitle>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featured.map((f) => (
-              <a key={f.name} href={f.url} target="_blank" rel="noopener noreferrer" className="group bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition hover-lift">
-                <div className="h-48 overflow-hidden">
-                  <img src={f.img} alt={f.name} className="w-full h-full object-cover group-hover:scale-105 transition" loading="lazy" />
-                </div>
-                <div className="p-4">
-                  <div className="font-semibold text-slate-800">{f.name}</div>
-                  <div className="text-xs text-slate-500 mt-1">{f.cat}</div>
-                  <div className="text-sm text-blue-600 font-semibold mt-3 flex items-center gap-1">
-                    Visit Website <ArrowRight className="w-3 h-3" />
+              <div className="absolute top-2 right-6 grad-border p-4 w-60 animate-float">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center"><LineChart className="w-4 h-4 text-indigo-300" /></div>
+                  <div>
+                    <div className="text-xs text-slate-400">Conversions</div>
+                    <div className="text-lg font-bold text-white">+182%</div>
                   </div>
                 </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>WHY CHOOSE US?</SectionTitle>
-          <div className="grid md:grid-cols-2 gap-10">
-            <div>
-              <h3 className="font-bold text-xl text-slate-800 mb-3">Certified Top SEO Experts</h3>
-              <p className="text-slate-600 leading-relaxed">
-                With a team of experts having more than 8 Years of experience, we evaluate ourselves as the best SEO Company.
-                We offer professional Web development & comprehensive SEO services and help our clients to get increased
-                organic search score significantly so as to compete for the top rankings in SERPs – even when it comes to
-                highly competitive keywords.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-xl text-slate-800 mb-3">Quality Solutions with 100% Satisfaction</h3>
-              <p className="text-slate-600 mb-4 leading-relaxed">
-                We have experienced and humble SEO Experts that provides all the aspects of Digital Marketing & offer Google first Page ranking results.
-              </p>
-              <ul className="space-y-2 text-slate-700">
-                {[
-                  "Content Marketing and Content Management",
-                  "Search Engine Optimization for Google, Yahoo, Bing, etc.",
-                  "Google Ads (Google AdWords), Pay Per Click Advertising",
-                  "Social Media Marketing & Optimization",
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-2"><Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" /> {t}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Us */}
-      <section id="about" className="py-20 px-4 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>ABOUT US</SectionTitle>
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=280&fit=crop",
-                "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=280&fit=crop",
-                "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=400&h=280&fit=crop",
-                "https://images.unsplash.com/photo-1547658719-da2b51169166?w=400&h=280&fit=crop",
-              ].map((src, i) => (
-                <img key={i} src={src} alt="About BrainBoxWorld" className="rounded-lg w-full h-40 object-cover" loading="lazy" />
-              ))}
-            </div>
-            <div>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                BrainBoxWorld is a leading digital marketing agency with over 8 years of experience in delivering exceptional
-                SEO and web development services. We specialize in helping businesses achieve first-page Google rankings,
-                increase organic traffic, and maximize online conversions.
-              </p>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                We pride ourselves on delivering measurable results and maintaining long-term partnerships with our clients.
-                From startup ventures to established enterprises, we provide customized digital marketing solutions that drive
-                real business growth.
-              </p>
-              <Link to="/portfolio" className="inline-block px-6 py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">
-                View Our Portfolio
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* What We Offer */}
-      <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>WHAT WE OFFER</SectionTitle>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {offers.map((o) => (
-              <div key={o.title} className="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover-lift">
-                <img src={o.img} alt={o.title} className="w-full h-48 object-cover" loading="lazy" />
-                <div className="p-6">
-                  <h3 className="font-bold text-lg text-slate-800 mb-2">{o.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-3">{o.desc}</p>
-                  <a href="https://wa.me/13312782900" className="text-blue-600 font-semibold text-sm hover:underline">READ MORE</a>
+                <div className="mt-3 h-12 flex items-end gap-1">
+                  {[30, 45, 38, 60, 70, 55, 82, 90, 75, 95].map((h, i) => (
+                    <div key={i} className="flex-1 rounded-sm bg-gradient-to-t from-indigo-500 to-violet-400" style={{ height: `${h}%` }} />
+                  ))}
                 </div>
+              </div>
+
+              <div className="absolute bottom-10 left-2 grad-border p-4 w-64 animate-float delay-300">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="text-xs text-slate-400">AI Workflow · Active</div>
+                </div>
+                <div className="space-y-1.5 text-xs text-slate-300">
+                  <div className="flex justify-between"><span>Lead captured</span><Check className="w-3 h-3 text-emerald-400" /></div>
+                  <div className="flex justify-between"><span>Enrichment</span><Check className="w-3 h-3 text-emerald-400" /></div>
+                  <div className="flex justify-between"><span>CRM sync</span><Check className="w-3 h-3 text-emerald-400" /></div>
+                  <div className="flex justify-between text-indigo-300"><span>AI follow-up</span><span className="animate-pulse">●●●</span></div>
+                </div>
+              </div>
+
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 grad-border p-5 w-56 animate-bob glow-soft">
+                <div className="flex items-center gap-2">
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center">
+                      <BrainCog className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-white text-sm">BrainBox AI</div>
+                    <div className="text-[10px] text-emerald-400">Online · ready</div>
+                  </div>
+                </div>
+                <div className="mt-3 bg-white/5 border border-white/10 rounded-lg p-2 text-xs text-slate-300">
+                  Ready to scale your business? Let's design your growth engine.
+                </div>
+              </div>
+
+              <div className="absolute bottom-4 right-2 grad-border px-3 py-2 animate-float delay-200">
+                <div className="flex items-center gap-2 text-xs">
+                  <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                  <span className="font-semibold text-white">4.9/5</span>
+                  <span className="text-slate-400">· 120+ reviews</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ====================== FLOATING STATS ====================== */}
+      <section className="relative -mt-6 md:-mt-10 px-4">
+        <div className="max-w-7xl mx-auto grad-border p-2 glow-soft reveal-zoom">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/5">
+            {stats.map((s, i) => (
+              <div key={s.label} className="p-6 md:p-8 text-center group">
+                <div className="text-3xl md:text-5xl font-bold font-display text-gradient">
+                  <AnimatedCounter value={s.value} prefix={s.prefix} suffix={s.suffix} />
+                </div>
+                <div className="mt-2 text-xs md:text-sm text-slate-400 tracking-wide uppercase">{s.label}</div>
+                <div className="mt-3 h-0.5 w-10 mx-auto bg-gradient-to-r from-indigo-500 to-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="sr-only">{i}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 px-4 bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="text-4xl md:text-5xl font-bold">{s.value}</div>
-              <div className="text-sm uppercase tracking-wider text-blue-100 mt-2">{s.label}</div>
+      {/* ====================== TECH STACK MARQUEE ====================== */}
+      <section className="relative py-24 px-4">
+        <SectionHeading
+          label="POWERED BY"
+          title={<>Industry-leading <span className="text-gradient">technologies</span></>}
+          subtitle="We use modern tools and scalable technologies to build high-performance digital experiences, AI systems, automation platforms, and growth-focused business solutions."
+        />
+
+        <div className="relative space-y-6 marquee-mask">
+          <div className="flex gap-4 animate-marquee w-max">
+            {[...techMarquee, ...techMarquee].map((t, i) => (
+              <div key={`a-${i}`} className="glass px-6 py-4 rounded-xl text-sm font-semibold text-slate-200 whitespace-nowrap hover:bg-indigo-500/10 hover:text-white transition-all">
+                {t}
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-4 animate-marquee-reverse w-max">
+            {[...techMarquee].reverse().concat([...techMarquee].reverse()).map((t, i) => (
+              <div key={`b-${i}`} className="glass px-6 py-4 rounded-xl text-sm font-semibold text-slate-200 whitespace-nowrap hover:bg-violet-500/10 hover:text-white transition-all">
+                {t}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          {techGroups.slice(0, 4).map((g) => (
+            <div key={g.group} className="grad-border p-5 hover-lift reveal">
+              <div className="text-xs tracking-widest text-indigo-300">{g.group.toUpperCase()}</div>
+              <div className="mt-2 text-sm text-slate-300">{g.items.join(" · ")}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Areas of Expertise */}
-      <section className="py-20 px-4">
+      {/* ====================== WHY US ====================== */}
+      <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
         <div className="max-w-7xl mx-auto">
-          <SectionTitle>AREAS OF EXPERTISE</SectionTitle>
-          <p className="text-center text-slate-600 -mt-8 mb-12 max-w-2xl mx-auto">
-            Deep specialization across every discipline that drives online growth — from strategy to execution.
-          </p>
+          <SectionHeading
+            label="WHY BRAINBOXWORLD"
+            title={<>Built for outcomes, <span className="text-gradient">not output</span></>}
+            subtitle="We don't sell deliverables — we build the systems that make your business compound."
+          />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {whyUs.map((w, i) => (
+              <div key={w.title} className="grad-border p-6 hover-lift reveal" style={{ transitionDelay: `${i * 60}ms` }}>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/30 to-violet-500/30 border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <w.icon className="w-6 h-6 text-indigo-300" />
+                </div>
+                <h3 className="font-semibold text-lg text-white font-display">{w.title}</h3>
+                <p className="mt-2 text-sm text-slate-400 leading-relaxed">{w.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====================== SERVICES ====================== */}
+      <section id="services" className="relative py-24 px-4 scroll-mt-24">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            label="WHAT WE DO"
+            title={<>Services engineered for <span className="text-gradient">growth</span></>}
+            subtitle="A complete digital partner — from brand and product design to engineering, AI, and growth systems."
+          />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((s, i) => (
+              <div key={s.title} className="group grad-border p-7 hover-lift reveal" style={{ transitionDelay: `${i * 60}ms` }}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500/30 to-violet-500/30 border border-white/10 flex items-center justify-center">
+                    <s.icon className="w-6 h-6 text-indigo-300" />
+                  </div>
+                  <h3 className="font-semibold text-lg text-white font-display">{s.title}</h3>
+                </div>
+                <p className="text-sm text-slate-400 leading-relaxed mb-4">{s.desc}</p>
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {s.items.map((it) => (
+                    <span key={it} className="text-[11px] px-2 py-1 rounded-md bg-white/5 border border-white/10 text-slate-300">{it}</span>
+                  ))}
+                </div>
+                <a href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-300 hover:text-indigo-200 story-link">
+                  Discuss your project <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====================== PORTFOLIO ====================== */}
+      <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-violet-950/20 to-transparent">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            label="SELECTED WORK"
+            title={<>Projects that move <span className="text-gradient">the needle</span></>}
+            subtitle="From DTC brands to enterprise platforms — measurable outcomes, premium craft."
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {expertise.map((e) => (
-              <div key={e.title} className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-lg transition hover-lift">
-                <e.icon className="w-8 h-8 text-blue-600 mb-3" />
-                <h3 className="font-bold text-lg text-slate-800 mb-2">{e.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{e.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>WHAT OUR CLIENTS SAY</SectionTitle>
-          <div className="grid md:grid-cols-2 gap-6">
-            {testimonials.map((t) => (
-              <div key={t.author} className="bg-white rounded-xl border border-slate-200 p-6">
-                <Quote className="w-8 h-8 text-blue-600 mb-3" />
-                <p className="text-slate-700 italic leading-relaxed">"{t.quote}"</p>
-                <div className="mt-4 text-sm font-semibold text-slate-800">— {t.author}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Insights */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <SectionTitle>LATEST INSIGHTS</SectionTitle>
-          <div className="grid md:grid-cols-3 gap-6">
-            {insights.map((i) => (
-              <Link key={i.slug} to="/blog" className="block bg-white border border-slate-200 rounded-xl p-6 hover:shadow-lg transition hover-lift">
-                <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
-                  <span className="text-blue-600 font-semibold">{i.tag}</span>
-                  <span>•</span>
-                  <span>{i.read}</span>
+            {portfolio.slice(0, 6).map((p, i) => (
+              <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer"
+                className="group grad-border overflow-hidden hover-lift reveal" style={{ transitionDelay: `${i * 60}ms` }}>
+                <div className="relative h-56 overflow-hidden">
+                  <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1200ms]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-[#0a0a1a]/30 to-transparent" />
+                  <div className="absolute top-3 left-3 text-[10px] tracking-widest uppercase px-2 py-1 rounded-md glass text-indigo-200">{p.cat}</div>
                 </div>
-                <h3 className="font-bold text-slate-800 mb-3 leading-snug">{i.title}</h3>
-                <div className="text-xs text-slate-500">{i.date}</div>
-                <div className="mt-4 text-sm text-blue-600 font-semibold flex items-center gap-1">
-                  Read More <ArrowRight className="w-3 h-3" />
+                <div className="p-5 flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold text-white">{p.name}</div>
+                    <div className="text-xs text-slate-400 mt-0.5">Live · Visit website</div>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Link to="/blog" className="inline-block px-6 py-3 rounded-md bg-slate-800 text-white font-semibold hover:bg-slate-900">
-              Read All Articles
+          <div className="text-center mt-12">
+            <Link to="/portfolio" className="inline-flex items-center gap-2 px-6 py-3 rounded-full glass hover:bg-white/10 border border-white/10 hover:border-white/30 text-sm font-semibold transition-all">
+              View Full Portfolio <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ====================== PROCESS ====================== */}
+      <section className="relative py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            label="HOW WE WORK"
+            title={<>A proven 7-step <span className="text-gradient">process</span></>}
+            subtitle="Strategy-led. Design-driven. Engineering-grade. Built to compound."
+          />
+          <div className="relative">
+            <div className="absolute left-0 right-0 top-12 hidden md:block h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent" />
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+              {workflow.map((w, i) => (
+                <div key={w.step} className="relative reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                  <div className="grad-border p-4 hover-lift">
+                    <div className="w-10 h-10 mx-auto rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-xs font-bold text-white shadow-[0_10px_30px_-10px_rgba(79,70,229,0.7)]">
+                      {w.step}
+                    </div>
+                    <div className="mt-3 text-center font-semibold text-white text-sm">{w.title}</div>
+                    <div className="mt-1 text-center text-xs text-slate-400">{w.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <section className="bg-slate-800 text-white py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Grow Your Business?</h2>
-          <p className="text-slate-300 mb-8">Contact us today for a free consultation and let's discuss how we can help you achieve your digital marketing goals.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href="https://wa.me/13312782900" className="px-6 py-3 rounded-full bg-green-500 hover:bg-green-600 font-semibold">Get Started</a>
-            <Link to="/contact" className="px-6 py-3 rounded-full bg-white text-slate-800 hover:bg-slate-100 font-semibold">Contact Us</Link>
+      {/* ====================== TESTIMONIALS ====================== */}
+      <section id="testimonials" className="relative py-24 px-4 scroll-mt-24 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            label="CLIENT STORIES"
+            title={<>Trusted by founders, <span className="text-gradient">loved by teams</span></>}
+          />
+          <div className="grid md:grid-cols-2 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="grad-border p-7 hover-lift reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                <Quote className="w-8 h-8 text-indigo-400/60 mb-3" />
+                <p className="text-slate-200 leading-relaxed">"{t.quote}"</p>
+                <div className="mt-5 flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold text-white">{t.author}</div>
+                    <div className="text-xs text-slate-400">{t.role}</div>
+                  </div>
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: t.rating }).map((_, k) => (
+                      <Star key={k} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====================== INSIGHTS ====================== */}
+      <section className="relative py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeading
+            label="INSIGHTS"
+            title={<>Field notes from the <span className="text-gradient">frontier</span></>}
+            subtitle="Strategy, architecture and growth — written for operators who ship."
+          />
+          <div className="grid md:grid-cols-3 gap-6">
+            {insights.map((p, i) => (
+              <Link key={p.slug} to="/blog" className="group grad-border p-6 hover-lift reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                <div className="flex items-center justify-between text-xs text-slate-400 mb-3">
+                  <span className="px-2 py-1 rounded-md bg-indigo-500/15 text-indigo-300 border border-indigo-400/20">{p.tag}</span>
+                  <span>{p.read}</span>
+                </div>
+                <h3 className="font-semibold text-white font-display text-lg leading-snug">{p.title}</h3>
+                <div className="mt-4 text-xs text-slate-500 flex items-center justify-between">
+                  <span>{p.date}</span>
+                  <ArrowUpRight className="w-4 h-4 text-indigo-300 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ====================== FINAL CTA ====================== */}
+      <section className="relative py-24 px-4">
+        <div className="max-w-6xl mx-auto relative overflow-hidden rounded-3xl">
+          <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
+          <div className="absolute inset-0 bg-grid opacity-40" />
+          <div className="absolute -top-20 -left-20 w-72 h-72 bg-indigo-600/40 rounded-full blur-3xl animate-blob" />
+          <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-violet-600/40 rounded-full blur-3xl animate-blob delay-300" />
+
+          <div className="relative px-6 py-20 md:py-28 text-center reveal-zoom">
+            <SectionLabel>READY WHEN YOU ARE</SectionLabel>
+            <h2 className="mt-6 text-4xl md:text-6xl font-bold font-display tracking-tight">
+              Ready to build something <span className="text-gradient">exceptional?</span>
+            </h2>
+            <p className="mt-5 text-slate-300 max-w-2xl mx-auto text-base md:text-lg">
+              Tell us where you are, where you want to be, and we'll architect the path. A 30-minute call is all it takes to start.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <a href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 btn-premium text-sm font-semibold px-7 py-4 rounded-full">
+                <CalendarCheck className="w-4 h-4" /> Book a Call
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+              <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full glass hover:bg-white/10 border border-white/10 hover:border-white/30 text-sm font-semibold transition-all">
+                <MessageSquare className="w-4 h-4" /> Start Your Project
+              </a>
+            </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-400">
+              <span className="flex items-center gap-1.5"><Globe2 className="w-3.5 h-3.5" /> Remote · Global</span>
+              <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> Replies within hours</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5" /> NDA on request</span>
+            </div>
           </div>
         </div>
       </section>
     </SiteLayout>
+  );
+}
+
+function Clock(props: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={props.className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+    </svg>
   );
 }

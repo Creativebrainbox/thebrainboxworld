@@ -15,6 +15,7 @@ export const Route = createFileRoute("/portfolio")({
 });
 
 const projects = [
+  { name: "mimiandco.com.au", img: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=500&fit=crop", url: "https://mimiandco.com.au" },
   { name: "retrospec.com", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=500&fit=crop", url: "https://retrospec.com/" },
   { name: "darntough.com", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=500&fit=crop", url: "https://darntough.com/" },
   { name: "trnda.com", img: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=500&fit=crop", url: "https://trnda.com/" },
