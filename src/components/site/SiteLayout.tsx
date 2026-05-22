@@ -109,7 +109,7 @@ function Header() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="w-full px-3 md:px-6 py-3 flex justify-between items-center gap-2">
         <Link to="/" className="flex items-center gap-3 group" onClick={() => setOpen(false)}>
           <div className="relative">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-indigo-500 via-violet-500 to-cyan-400 opacity-60 blur-md group-hover:opacity-100 transition-opacity" />
