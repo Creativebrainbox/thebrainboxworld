@@ -195,7 +195,7 @@ function Footer() {
         <div className="absolute -bottom-40 right-1/4 w-[28rem] h-[28rem] bg-violet-600/15 rounded-full blur-3xl animate-blob delay-300" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-12 gap-12">
+      <div className="relative w-full px-4 md:px-8 py-16 grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-4">
           <div className="flex items-center gap-3 mb-5">
             <img src={logo} alt="BrainBoxWorld logo" className="w-11 h-11 object-contain bg-white/5 rounded-full p-1 border border-white/10" />
