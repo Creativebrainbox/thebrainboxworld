@@ -384,7 +384,7 @@ export function PageHero({ title, subtitle }: { title: string; subtitle?: string
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-indigo-500/30 rounded-full blur-3xl animate-blob" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/25 rounded-full blur-3xl animate-blob delay-300" />
-      <div className="relative max-w-5xl mx-auto text-center px-4 py-24 md:py-32">
+      <div className="relative w-full max-w-6xl mx-auto text-center px-4 md:px-8 py-16 md:py-24">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 mb-6 animate-fade-in">
           <Sparkles className="w-3.5 h-3.5" /> BRAINBOXWORLD
         </div>
