@@ -75,7 +75,7 @@ const mobileNavItems = [
 function TopBar() {
   return (
     <div className="hidden md:block bg-[#0a0a1a] text-slate-400 text-xs border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center gap-4">
+      <div className="w-full px-4 md:px-6 py-2 flex justify-between items-center gap-4">
         <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-300 transition-colors">
           <Phone className="w-3.5 h-3.5" /><span>+1 (331) 278-2900</span>
         </a>
