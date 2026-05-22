@@ -64,7 +64,7 @@ function BlogPage() {
     <SiteLayout>
       <PageHero title="Insights & Blog" subtitle="Strategic insights, tactical guides, and growth frameworks from the BrainBoxWorld team." />
       <section className="py-16 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-[1400px] mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((p) => (
             <article key={p.title} className="bg-white rounded-xl overflow-hidden border border-slate-200 hover:shadow-lg transition flex flex-col">
               <img src={p.img} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />

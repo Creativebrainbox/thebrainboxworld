@@ -34,7 +34,7 @@ function AboutPage() {
         </p>
       </section>
       <section className="py-16 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">Why brands work with us</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {values.map((v) => (

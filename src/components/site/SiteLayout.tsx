@@ -75,7 +75,7 @@ const mobileNavItems = [
 function TopBar() {
   return (
     <div className="hidden md:block bg-[#0a0a1a] text-slate-400 text-xs border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center gap-4">
+      <div className="w-full px-4 md:px-6 py-2 flex justify-between items-center gap-4">
         <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-300 transition-colors">
           <Phone className="w-3.5 h-3.5" /><span>+1 (331) 278-2900</span>
         </a>
@@ -109,7 +109,7 @@ function Header() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="w-full px-3 md:px-6 py-3 flex justify-between items-center gap-2">
         <Link to="/" className="flex items-center gap-3 group" onClick={() => setOpen(false)}>
           <div className="relative">
             <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-indigo-500 via-violet-500 to-cyan-400 opacity-60 blur-md group-hover:opacity-100 transition-opacity" />
@@ -159,7 +159,7 @@ function Header() {
 
       {open && (
         <nav className="lg:hidden border-t border-white/10 glass-strong animate-fade-in">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
+          <div className="w-full px-3 md:px-6 py-4 flex flex-col gap-1">
             {mobileNavItems.map((item) => (
               <Link
                 key={item.label}
@@ -195,7 +195,7 @@ function Footer() {
         <div className="absolute -bottom-40 right-1/4 w-[28rem] h-[28rem] bg-violet-600/15 rounded-full blur-3xl animate-blob delay-300" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-12 gap-12">
+      <div className="relative w-full px-4 md:px-8 py-16 grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-4">
           <div className="flex items-center gap-3 mb-5">
             <img src={logo} alt="BrainBoxWorld logo" className="w-11 h-11 object-contain bg-white/5 rounded-full p-1 border border-white/10" />
@@ -281,19 +281,24 @@ export function LiveChatWidget() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        aria-label="Open live chat"
-        className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full btn-premium flex items-center justify-center animate-pulse-glow group"
+        aria-label="Chat with me on WhatsApp"
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 inline-flex items-center gap-2 pl-4 pr-5 py-3 rounded-full btn-premium shadow-2xl animate-pulse-glow group"
       >
         <span className="absolute -top-1 -right-1 flex h-3 w-3">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
         </span>
-        {open ? <X className="w-7 h-7 text-white" /> : <MessageCircle className="w-7 h-7 text-white transition-transform group-hover:scale-110" />}
+        {open ? (
+          <X className="w-5 h-5 text-white" />
+        ) : (
+          <MessageCircle className="w-5 h-5 text-white transition-transform group-hover:scale-110" />
+        )}
+        {!open && <span className="text-sm font-semibold text-white whitespace-nowrap">Chat with me</span>}
       </button>
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-28 right-6 z-50 w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+        <div className="fixed bottom-20 right-4 md:bottom-24 md:right-6 z-50 w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
           <div className="relative p-5 bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-700 text-white overflow-hidden">
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative flex items-center gap-3">
@@ -379,7 +384,7 @@ export function PageHero({ title, subtitle }: { title: string; subtitle?: string
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-indigo-500/30 rounded-full blur-3xl animate-blob" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/25 rounded-full blur-3xl animate-blob delay-300" />
-      <div className="relative max-w-5xl mx-auto text-center px-4 py-24 md:py-32">
+      <div className="relative w-full max-w-6xl mx-auto text-center px-4 md:px-8 py-16 md:py-24">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 mb-6 animate-fade-in">
           <Sparkles className="w-3.5 h-3.5" /> BRAINBOXWORLD
         </div>

@@ -34,7 +34,7 @@ function PortfolioPage() {
         subtitle="Check out some of our recent projects and see how we've helped businesses like yours succeed online."
       />
       <section className="py-16 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-[1400px] mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((p) => (
             <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer" className="group block rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-white hover:shadow-xl transition">
               <div className="relative h-72 overflow-hidden">

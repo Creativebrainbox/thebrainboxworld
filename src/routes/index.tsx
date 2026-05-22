@@ -186,7 +186,7 @@ function HomePage() {
         <div className="absolute top-1/3 right-0 w-[28rem] h-[28rem] bg-violet-600/25 rounded-full blur-3xl animate-blob delay-300" />
         <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-blob delay-500" />
 
-        <div className="relative max-w-7xl mx-auto px-4 pt-20 md:pt-28 pb-20 md:pb-32">
+        <div className="relative max-w-[1400px] mx-auto px-4 pt-20 md:pt-28 pb-20 md:pb-32">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 animate-fade-in">
@@ -297,7 +297,7 @@ function HomePage() {
 
       {/* ====================== FLOATING STATS ====================== */}
       <section className="relative -mt-6 md:-mt-10 px-4">
-        <div className="max-w-7xl mx-auto grad-border p-2 glow-soft reveal-zoom">
+        <div className="max-w-[1400px] mx-auto grad-border p-2 glow-soft reveal-zoom">
           <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/5">
             {stats.map((s, i) => (
               <div key={s.label} className="p-6 md:p-8 text-center group">
@@ -350,7 +350,7 @@ function HomePage() {
 
       {/* ====================== WHY US ====================== */}
       <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="WHY BRAINBOXWORLD"
             title={<>Built for outcomes, <span className="text-gradient">not output</span></>}
@@ -372,7 +372,7 @@ function HomePage() {
 
       {/* ====================== SERVICES ====================== */}
       <section id="services" className="relative py-24 px-4 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="WHAT WE DO"
             title={<>Services engineered for <span className="text-gradient">growth</span></>}
@@ -404,7 +404,7 @@ function HomePage() {
 
       {/* ====================== PORTFOLIO ====================== */}
       <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-violet-950/20 to-transparent">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="SELECTED WORK"
             title={<>Projects that move <span className="text-gradient">the needle</span></>}
@@ -439,7 +439,7 @@ function HomePage() {
 
       {/* ====================== PROCESS ====================== */}
       <section className="relative py-24 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="HOW WE WORK"
             title={<>A proven 7-step <span className="text-gradient">process</span></>}
@@ -466,7 +466,7 @@ function HomePage() {
 
       {/* ====================== TESTIMONIALS ====================== */}
       <section id="testimonials" className="relative py-24 px-4 scroll-mt-24 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="CLIENT STORIES"
             title={<>Trusted by founders, <span className="text-gradient">loved by teams</span></>}
@@ -495,7 +495,7 @@ function HomePage() {
 
       {/* ====================== INSIGHTS ====================== */}
       <section className="relative py-24 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="INSIGHTS"
             title={<>Field notes from the <span className="text-gradient">frontier</span></>}
