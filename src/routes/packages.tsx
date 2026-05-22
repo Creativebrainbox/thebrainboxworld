@@ -75,7 +75,7 @@ const plans = [
 function PackagesPage() {
   return (
     <SiteLayout>
-      <section className="py-20 px-4 bg-slate-50">
+      <section className="py-10 px-4 bg-slate-50">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Choose Your Package</h1>

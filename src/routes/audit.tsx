@@ -49,7 +49,7 @@ function AuditPage() {
   return (
     <SiteLayout>
       <PageHero title="Free Growth Foundations Audit" subtitle="A focused diagnostic for brands that want to scale without structural friction, conversion leaks, or blind data." />
-      <section className="py-16 px-4 bg-slate-50">
+      <section className="py-10 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
           <div>
             <h2 className="text-2xl font-bold text-slate-800 mb-4">What's included</h2>

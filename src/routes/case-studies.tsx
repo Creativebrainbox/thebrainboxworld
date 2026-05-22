@@ -57,7 +57,7 @@ function CaseStudiesPage() {
   return (
     <SiteLayout>
       <PageHero title="Case Studies" subtitle="Handpicked projects showcasing our approach to growth systems — real brands, real strategies, real results." />
-      <section className="py-16 px-4 bg-slate-50">
+      <section className="py-10 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto space-y-12">
           {cases.map((c, i) => (
             <article key={c.name} className={`grid md:grid-cols-2 gap-8 items-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>

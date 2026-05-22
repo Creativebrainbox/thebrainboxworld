@@ -54,7 +54,7 @@ function ContactPage() {
         title="Get In Touch"
         subtitle="Ready to transform your digital presence? We'd love to hear about your project and explore how we can help."
       />
-      <section className="py-16 px-4 bg-slate-50">
+      <section className="py-10 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
           {/* Info */}
           <div>
