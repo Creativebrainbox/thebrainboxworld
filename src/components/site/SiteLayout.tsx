@@ -189,13 +189,13 @@ function Header() {
 
 function Footer() {
   return (
-    <footer className="relative mt-24 border-t border-white/10 bg-[#0a0a1a] overflow-hidden">
+    <footer className="relative mt-12 border-t border-white/10 bg-[#0a0a1a] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-blob" />
         <div className="absolute -bottom-40 right-1/4 w-[28rem] h-[28rem] bg-violet-600/15 rounded-full blur-3xl animate-blob delay-300" />
       </div>
 
-      <div className="relative w-full px-4 md:px-8 py-16 grid lg:grid-cols-12 gap-12">
+      <div className="relative w-full px-4 md:px-8 py-10 grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4">
           <div className="flex items-center gap-3 mb-5">
             <img src={logo} alt="BrainBoxWorld logo" className="w-11 h-11 object-contain bg-white/5 rounded-full p-1 border border-white/10" />
@@ -282,7 +282,8 @@ export function LiveChatWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Chat with me on WhatsApp"
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 inline-flex items-center gap-2 pl-4 pr-5 py-3 rounded-full btn-premium shadow-2xl animate-pulse-glow group"
+        style={{ width: "auto", maxWidth: "calc(100vw - 1.5rem)" }}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[60] w-auto inline-flex items-center gap-2 pl-3 pr-4 py-2.5 rounded-full btn-premium shadow-2xl animate-pulse-glow group"
       >
         <span className="absolute -top-1 -right-1 flex h-3 w-3">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -293,12 +294,12 @@ export function LiveChatWidget() {
         ) : (
           <MessageCircle className="w-5 h-5 text-white transition-transform group-hover:scale-110" />
         )}
-        {!open && <span className="text-sm font-semibold text-white whitespace-nowrap">Chat with me</span>}
+        {!open && <span className="text-sm font-semibold text-white whitespace-nowrap">Chat</span>}
       </button>
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-20 right-4 md:bottom-24 md:right-6 z-50 w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+        <div className="fixed bottom-20 right-4 md:bottom-24 md:right-6 z-[60] w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
           <div className="relative p-5 bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-700 text-white overflow-hidden">
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative flex items-center gap-3">
@@ -384,7 +385,7 @@ export function PageHero({ title, subtitle }: { title: string; subtitle?: string
       <div className="absolute inset-0 bg-grid opacity-50" />
       <div className="absolute -top-20 -left-20 w-72 h-72 bg-indigo-500/30 rounded-full blur-3xl animate-blob" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/25 rounded-full blur-3xl animate-blob delay-300" />
-      <div className="relative w-full max-w-6xl mx-auto text-center px-4 md:px-8 py-16 md:py-24">
+      <div className="relative w-full max-w-6xl mx-auto text-center px-4 md:px-8 py-10 md:py-12">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 mb-6 animate-fade-in">
           <Sparkles className="w-3.5 h-3.5" /> BRAINBOXWORLD
         </div>

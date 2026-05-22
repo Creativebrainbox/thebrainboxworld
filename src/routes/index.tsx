@@ -164,7 +164,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function SectionHeading({ label, title, subtitle, align = "center" }: { label: string; title: React.ReactNode; subtitle?: string; align?: "center" | "left" }) {
   const alignCls = align === "center" ? "text-center items-center" : "text-left items-start";
   return (
-    <div className={`flex flex-col ${alignCls} max-w-3xl ${align === "center" ? "mx-auto" : ""} mb-14 reveal`}>
+    <div className={`flex flex-col ${alignCls} max-w-3xl ${align === "center" ? "mx-auto" : ""} mb-8 reveal`}>
       <SectionLabel>{label}</SectionLabel>
       <h2 className="mt-5 text-3xl md:text-5xl font-bold font-display tracking-tight">{title}</h2>
       {subtitle && <p className="mt-4 text-slate-400 text-base md:text-lg leading-relaxed">{subtitle}</p>}
@@ -187,7 +187,7 @@ function HomePage() {
         <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-blob delay-500" />
 
         <div className="relative max-w-[1400px] mx-auto px-4 pt-20 md:pt-28 pb-20 md:pb-32">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs tracking-wider text-indigo-200 animate-fade-in">
                 <Sparkles className="w-3.5 h-3.5" />
@@ -314,7 +314,7 @@ function HomePage() {
       </section>
 
       {/* ====================== TECH STACK MARQUEE ====================== */}
-      <section className="relative py-24 px-4">
+      <section className="relative py-12 px-4">
         <SectionHeading
           label="POWERED BY"
           title={<>Industry-leading <span className="text-gradient">technologies</span></>}
@@ -349,7 +349,7 @@ function HomePage() {
       </section>
 
       {/* ====================== WHY US ====================== */}
-      <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
+      <section className="relative py-12 px-4 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
         <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="WHY BRAINBOXWORLD"
@@ -371,7 +371,7 @@ function HomePage() {
       </section>
 
       {/* ====================== SERVICES ====================== */}
-      <section id="services" className="relative py-24 px-4 scroll-mt-24">
+      <section id="services" className="relative py-12 px-4 scroll-mt-12">
         <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="WHAT WE DO"
@@ -403,7 +403,7 @@ function HomePage() {
       </section>
 
       {/* ====================== PORTFOLIO ====================== */}
-      <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-violet-950/20 to-transparent">
+      <section className="relative py-12 px-4 bg-gradient-to-b from-transparent via-violet-950/20 to-transparent">
         <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="SELECTED WORK"
@@ -438,7 +438,7 @@ function HomePage() {
       </section>
 
       {/* ====================== PROCESS ====================== */}
-      <section className="relative py-24 px-4">
+      <section className="relative py-12 px-4">
         <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="HOW WE WORK"
@@ -465,7 +465,7 @@ function HomePage() {
       </section>
 
       {/* ====================== TESTIMONIALS ====================== */}
-      <section id="testimonials" className="relative py-24 px-4 scroll-mt-24 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
+      <section id="testimonials" className="relative py-12 px-4 scroll-mt-12 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
         <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="CLIENT STORIES"
@@ -494,7 +494,7 @@ function HomePage() {
       </section>
 
       {/* ====================== INSIGHTS ====================== */}
-      <section className="relative py-24 px-4">
+      <section className="relative py-12 px-4">
         <div className="max-w-[1400px] mx-auto">
           <SectionHeading
             label="INSIGHTS"
@@ -520,14 +520,14 @@ function HomePage() {
       </section>
 
       {/* ====================== FINAL CTA ====================== */}
-      <section className="relative py-24 px-4">
+      <section className="relative py-12 px-4">
         <div className="max-w-6xl mx-auto relative overflow-hidden rounded-3xl">
           <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
           <div className="absolute inset-0 bg-grid opacity-40" />
           <div className="absolute -top-20 -left-20 w-72 h-72 bg-indigo-600/40 rounded-full blur-3xl animate-blob" />
           <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-violet-600/40 rounded-full blur-3xl animate-blob delay-300" />
 
-          <div className="relative px-6 py-20 md:py-28 text-center reveal-zoom">
+          <div className="relative px-6 py-10 md:py-14 text-center reveal-zoom">
             <SectionLabel>READY WHEN YOU ARE</SectionLabel>
             <h2 className="mt-6 text-4xl md:text-6xl font-bold font-display tracking-tight">
               Ready to build something <span className="text-gradient">exceptional?</span>

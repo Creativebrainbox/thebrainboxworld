@@ -24,7 +24,7 @@ function AboutPage() {
   return (
     <SiteLayout>
       <PageHero title="About BrainBoxWorld" subtitle="A digital marketing agency built around growth systems — not just websites." />
-      <section className="py-20 px-4 max-w-5xl mx-auto">
+      <section className="py-10 px-4 max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-slate-800 mb-4">Who we are</h2>
         <p className="text-slate-600 leading-relaxed mb-4">
           BrainBoxWorld is a leading digital marketing agency with over 8 years of experience delivering SEO and web development services that compound. We help businesses achieve first-page Google rankings, increase organic traffic, and maximize online conversions.
@@ -33,7 +33,7 @@ function AboutPage() {
           We pride ourselves on measurable results and long-term partnerships — from startup ventures to established enterprises, we build customized growth solutions that drive real business outcomes.
         </p>
       </section>
-      <section className="py-16 px-4 bg-slate-50">
+      <section className="py-10 px-4 bg-slate-50">
         <div className="max-w-[1400px] mx-auto">
           <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">Why brands work with us</h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -47,7 +47,7 @@ function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="py-16 px-4 max-w-4xl mx-auto">
+      <section className="py-10 px-4 max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-slate-800 mb-6">What we deliver</h2>
         <ul className="space-y-3">
           {[
