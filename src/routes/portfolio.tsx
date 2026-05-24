@@ -38,7 +38,7 @@ function PortfolioPage() {
           {projects.map((p) => (
             <a key={p.name} href={p.url} target="_blank" rel="noopener noreferrer" className="group block rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-white hover:shadow-xl transition">
               <div className="relative h-72 overflow-hidden">
-                <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" />
+                <img src={p.img} alt={`${p.name} website project showcase`} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
                   <span className="text-white font-semibold">{p.name}</span>
                 </div>
