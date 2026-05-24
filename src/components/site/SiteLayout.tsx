@@ -368,7 +368,7 @@ export const WhatsAppFloat = LiveChatWidget;
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   useScrollReveal();
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0a1a] text-slate-100 selection:bg-indigo-500/40">
+    <div className="min-h-screen flex flex-col bg-[#0a0a1a] text-slate-100 selection:bg-indigo-500/40 overflow-x-hidden w-full max-w-[100vw]">
       <TopBar />
       <Header />
       <main className="flex-1">{children}</main>
