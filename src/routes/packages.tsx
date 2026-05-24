@@ -98,7 +98,7 @@ function PackagesPage() {
                       Most Popular
                     </span>
                   )}
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">{p.name}</h3>
+                  <h2 className="text-xl font-bold text-slate-800 mb-2">{p.name}</h2>
                   <div className="mb-3">
                     <span className="text-4xl font-bold text-slate-900">{p.price}</span>
                     <span className="text-slate-500">/month</span>
