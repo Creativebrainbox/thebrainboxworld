@@ -10,7 +10,7 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "BrainBoxWorld — Modern Digital Solutions, AI, Automation & Growth" },
+      { title: "BrainBoxWorld — Digital Solutions, AI & Automation" },
       { name: "description", content: "BrainBoxWorld builds high-performance websites, AI systems, automation, and growth-focused digital experiences. Book a 30-minute strategy call." },
       { property: "og:title", content: "BrainBoxWorld — Modern Digital Solutions" },
       { property: "og:description", content: "Websites, apps, AI, automation, and growth systems that scale. Book a 30-minute strategy call." },
