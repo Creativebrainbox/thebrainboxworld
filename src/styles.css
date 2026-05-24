@@ -101,7 +101,7 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; background: var(--bb-bg); }
+  html { scroll-behavior: smooth; background: var(--bb-bg); overflow-x: hidden; }
   body {
     background: var(--bb-bg);
     color: var(--color-foreground);
@@ -109,6 +109,8 @@
     font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: "Sora", system-ui, sans-serif;
