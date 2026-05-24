@@ -136,7 +136,7 @@ function ExperiencePage() {
 
           {/* CTA */}
           <div className="mt-16 bg-white rounded-2xl border border-slate-200 p-10 text-center max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-slate-800 mb-3">Ready to Join Our Success Stories?</h3>
+            <h2 className="text-2xl font-bold text-slate-800 mb-3">Ready to Join Our Success Stories?</h2>
             <p className="text-slate-600 mb-6">Let us help you achieve similar results. Start your journey to digital success today.</p>
             <div className="flex flex-wrap justify-center gap-4">
               <a href="https://wa.me/13312782900" className="px-6 py-3 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold">Get Started</a>
