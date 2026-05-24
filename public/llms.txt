@@ -1,0 +1,15 @@
+# BrainBoxWorld
+
+> BrainBoxWorld builds high-performance websites, AI systems, automation, and growth-focused digital experiences for ambitious brands.
+
+## Pages
+
+- [Home](/): Overview of BrainBoxWorld services — web, AI, automation, and growth.
+- [About](/about): Who we are and how we work.
+- [Experience](/experience): Track record of SEO, traffic, and conversion results.
+- [Portfolio](/portfolio): Selected client projects and live websites.
+- [Case Studies](/case-studies): Detailed before/after results from client work.
+- [Packages](/packages): Service tiers and pricing.
+- [Blog](/blog): Strategic insights on SEO, conversion, and growth.
+- [Audit](/audit): Request a free Growth Foundations Audit.
+- [Contact](/contact): Get in touch to start a project.
