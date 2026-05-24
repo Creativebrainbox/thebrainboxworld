@@ -61,7 +61,7 @@ function CaseStudiesPage() {
         <div className="max-w-6xl mx-auto space-y-12">
           {cases.map((c, i) => (
             <article key={c.name} className={`grid md:grid-cols-2 gap-8 items-center bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
-              <img src={c.img} alt={c.name} className="w-full h-72 md:h-full object-cover" loading="lazy" />
+              <img src={c.img} alt={`${c.name} case study showcase`} className="w-full h-72 md:h-full object-cover" loading="lazy" />
               <div className="p-8">
                 <div className="text-xs uppercase tracking-widest text-blue-600 font-semibold">{c.cat}</div>
                 <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mt-2">{c.name}</h2>
