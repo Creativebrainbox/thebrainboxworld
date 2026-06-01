@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { blogPosts, getPostBySlug } from "@/lib/blog-posts";
+import { blogPosts, getPostBySlug, type BlogPost, type BlogSection } from "@/lib/blog-posts";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const post = Route.useLoaderData();
+  const post = Route.useLoaderData() as BlogPost;
   const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   return (
@@ -80,11 +80,11 @@ function BlogPostPage() {
             <img src={post.img} alt={post.title} className="w-full rounded-2xl border border-slate-200 mb-10 object-cover" />
             <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-8">{post.intro}</p>
             <div className="space-y-8">
-              {post.sections.map((s, i) => (
+              {post.sections.map((s: BlogSection, i: number) => (
                 <section key={i}>
                   {s.heading && <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-3">{s.heading}</h2>}
                   <div className="space-y-4">
-                    {s.paras.map((p, j) => (
+                    {s.paras.map((p: string, j: number) => (
                       <p key={j} className="text-slate-600 leading-relaxed">{p}</p>
                     ))}
                   </div>
