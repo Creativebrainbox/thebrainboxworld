@@ -364,6 +364,69 @@ export function LiveChatWidget() {
 /** Backwards-compatible export kept for other pages that imported it. */
 export const WhatsAppFloat = LiveChatWidget;
 
+/** Floating button that reveals every place people can reach us. */
+export function SocialReachWidget() {
+  const [open, setOpen] = useState(false);
+
+  const channels = [
+    { label: "Instagram", href: SOCIALS.instagram, Icon: Instagram, bg: "bg-pink-500" },
+    { label: "Facebook", href: SOCIALS.facebook, Icon: Facebook, bg: "bg-blue-600" },
+    { label: "X (Twitter)", href: SOCIALS.x, Icon: XIcon, bg: "bg-slate-800" },
+    { label: "LinkedIn", href: SOCIALS.linkedin, Icon: Linkedin, bg: "bg-sky-700" },
+    { label: "TikTok", href: SOCIALS.tiktok, Icon: TikTokIcon, bg: "bg-slate-900" },
+    { label: "Email", href: `mailto:${CONTACT_EMAIL}`, Icon: Mail, bg: "bg-indigo-600" },
+    { label: "WhatsApp", href: WHATSAPP_LINK, Icon: MessageCircle, bg: "bg-emerald-600" },
+  ];
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-label="More ways to reach us"
+        aria-expanded={open}
+        className="fixed bottom-24 right-5 md:bottom-28 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl group ring-4 ring-cyan-400/30 transition-transform hover:scale-105"
+        style={{ background: "linear-gradient(135deg, #22d3ee 0%, #0891b2 100%)" }}
+      >
+        {open ? (
+          <X className="w-6 h-6 text-white" />
+        ) : (
+          <Sparkles className="w-7 h-7 text-white transition-transform group-hover:scale-110" />
+        )}
+      </button>
+
+      {open && (
+        <div className="fixed bottom-44 right-4 md:bottom-48 md:right-7 z-[9999] w-[20rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+          <div className="relative p-5 bg-gradient-to-br from-cyan-600 via-cyan-700 to-sky-700 text-white overflow-hidden">
+            <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
+            <div className="relative">
+              <div className="font-semibold text-lg">Reach us anywhere</div>
+              <div className="text-xs text-cyan-100">Tap a channel to connect instantly</div>
+            </div>
+          </div>
+          <div className="p-3 grid grid-cols-1 gap-2 bg-[#0a0a1a]/80 max-h-[24rem] overflow-y-auto">
+            {channels.map((c) => (
+              <a
+                key={c.label}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-400/50 text-slate-200 transition-all hover:translate-x-1"
+              >
+                <span className={`w-9 h-9 rounded-full ${c.bg} flex items-center justify-center text-white flex-shrink-0`}>
+                  <c.Icon className="w-4 h-4" />
+                </span>
+                <span className="text-sm font-medium">{c.label}</span>
+                <ArrowRight className="w-4 h-4 ml-auto text-slate-500" />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   useScrollReveal();
   return (
@@ -372,6 +435,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       <Header />
       <main className="flex-1">{children}</main>
       <Footer />
+      <SocialReachWidget />
       <LiveChatWidget />
     </div>
   );

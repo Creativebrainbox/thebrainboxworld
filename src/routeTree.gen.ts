@@ -19,6 +19,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuditRouteImport } from './routes/audit'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 import { Route as ApiPublicAuditRouteImport } from './routes/api/public/audit'
 
@@ -72,6 +73,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
   id: '/api/public/contact',
   path: '/api/public/contact',
@@ -87,13 +93,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/audit': typeof AuditRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
   '/packages': typeof PackagesRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
@@ -101,13 +108,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/audit': typeof AuditRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
   '/packages': typeof PackagesRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
@@ -116,13 +124,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/audit': typeof AuditRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
   '/packages': typeof PackagesRoute
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/contact': typeof ApiPublicContactRoute
 }
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/packages'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/api/public/audit'
     | '/api/public/contact'
   fileRoutesByTo: FileRoutesByTo
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/packages'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/api/public/audit'
     | '/api/public/contact'
   id:
@@ -167,6 +178,7 @@ export interface FileRouteTypes {
     | '/packages'
     | '/portfolio'
     | '/sitemap.xml'
+    | '/blog/$slug'
     | '/api/public/audit'
     | '/api/public/contact'
   fileRoutesById: FileRoutesById
@@ -175,7 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AuditRoute: typeof AuditRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CaseStudiesRoute: typeof CaseStudiesRoute
   ContactRoute: typeof ContactRoute
   ExperienceRoute: typeof ExperienceRoute
@@ -258,6 +270,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/api/public/contact': {
       id: '/api/public/contact'
       path: '/api/public/contact'
@@ -275,11 +294,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AuditRoute: AuditRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   CaseStudiesRoute: CaseStudiesRoute,
   ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
