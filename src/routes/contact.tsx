@@ -18,6 +18,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,20 +27,22 @@ function ContactPage() {
     const payload = {
       name: String(fd.get('name') || ''),
       email: String(fd.get('email') || ''),
+      phone: String(fd.get('phone') || ''),
       company: String(fd.get('company') || ''),
       service: String(fd.get('service') || ''),
-      budget: String(fd.get('budget') || ''),
       message: String(fd.get('message') || ''),
-      source: 'contact',
+      source_page: 'Contact Form',
+      company_url: String(fd.get('company_url') || ''), // honeypot
     };
     try {
-      const res = await fetch('/api/public/contact', {
+      const res = await fetch('/api/public/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Failed');
       (e.target as HTMLFormElement).reset();
+      setSuccess(true);
       toast.success("Message sent! We'll get back to you shortly.");
     } catch {
       toast.error("Something went wrong. Please try again or WhatsApp us.");
