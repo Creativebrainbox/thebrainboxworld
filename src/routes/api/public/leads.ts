@@ -134,29 +134,44 @@ function brandedEmailHtml(lead: Lead): string {
   </body></html>`;
 }
 
+function brandedEmailText(lead: Lead): string {
+  return (
+    `New Lead Received\n\n` +
+    `Name: ${lead.name}\n` +
+    `Email: ${lead.email}\n` +
+    `Phone: ${lead.phone || '—'}\n` +
+    `Company: ${lead.company || '—'}\n` +
+    `Website: ${lead.website || '—'}\n` +
+    (lead.service ? `Service: ${lead.service}\n` : '') +
+    `\nMessage:\n${lead.message || '—'}\n\n` +
+    `Source: ${lead.source_page}`
+  );
+}
+
 async function sendEmail(lead: Lead) {
   const apiKey = process.env.LOVABLE_API_KEY;
-  if (!apiKey) {
-    console.warn('LOVABLE_API_KEY not configured — skipping email notification');
+  // FROM_EMAIL must be on the verified sender domain; SENDER_DOMAIN is that
+  // verified subdomain FQDN. Both are set once the email domain is configured.
+  const fromEmail = process.env.LEADS_FROM_EMAIL;
+  const senderDomain = process.env.LEADS_SENDER_DOMAIN;
+  if (!apiKey || !fromEmail || !senderDomain) {
+    console.warn('Email sender not configured (LEADS_FROM_EMAIL / LEADS_SENDER_DOMAIN) — skipping email notification');
     return;
   }
   try {
-    const res = await fetch('https://email.lovable.dev/v1/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
+    await sendLovableEmail(
+      {
         to: NOTIFY_EMAIL,
+        from: fromEmail,
+        sender_domain: senderDomain,
         reply_to: lead.email,
         subject: `🚀 New Lead: ${lead.name}${lead.service ? ` — ${lead.service}` : ''}`,
         html: brandedEmailHtml(lead),
-      }),
-    });
-    if (!res.ok) {
-      console.error('Email notification failed', res.status, await res.text());
-    }
+        text: brandedEmailText(lead),
+        purpose: 'transactional',
+      },
+      { apiKey },
+    );
   } catch (err) {
     console.error('Email notification error', err);
   }
