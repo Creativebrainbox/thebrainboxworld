@@ -26,20 +26,31 @@ const includes = [
 ];
 
 function AuditPage() {
-  const [form, setForm] = useState({ name: "", email: "", website: "", goals: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", website: "", goals: "", company_url: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch('/api/public/audit', {
+      const res = await fetch('/api/public/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          website: form.website,
+          message: form.goals,
+          service: 'SEO & Growth Audit',
+          source_page: 'Book SEO Audit',
+          company_url: form.company_url, // honeypot
+        }),
       });
       if (!res.ok) throw new Error('Failed');
       toast.success("Audit request received! We'll be in touch within 24 hours.");
-      setForm({ name: "", email: "", website: "", goals: "" });
+      setForm({ name: "", email: "", phone: "", website: "", goals: "", company_url: "" });
+      setSuccess(true);
     } catch {
       toast.error("Something went wrong. Please try again or WhatsApp us.");
     } finally {
