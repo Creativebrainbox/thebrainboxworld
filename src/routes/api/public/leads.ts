@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { supabaseAdmin } from '@/integrations/supabase/client.server';
+import { sendLovableEmail } from '@lovable.dev/email-js';
 import { z } from 'zod';
 
 // Unified lead-capture endpoint used by the Contact form and the Book SEO Audit form.
