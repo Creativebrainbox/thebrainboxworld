@@ -18,6 +18,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,20 +27,22 @@ function ContactPage() {
     const payload = {
       name: String(fd.get('name') || ''),
       email: String(fd.get('email') || ''),
+      phone: String(fd.get('phone') || ''),
       company: String(fd.get('company') || ''),
       service: String(fd.get('service') || ''),
-      budget: String(fd.get('budget') || ''),
       message: String(fd.get('message') || ''),
-      source: 'contact',
+      source_page: 'Contact Form',
+      company_url: String(fd.get('company_url') || ''), // honeypot
     };
     try {
-      const res = await fetch('/api/public/contact', {
+      const res = await fetch('/api/public/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error('Failed');
       (e.target as HTMLFormElement).reset();
+      setSuccess(true);
       toast.success("Message sent! We'll get back to you shortly.");
     } catch {
       toast.error("Something went wrong. Please try again or WhatsApp us.");
@@ -81,12 +84,29 @@ function ContactPage() {
 
 
           {/* Form */}
+          {success ? (
+            <div className="bg-white rounded-xl border border-green-200 p-8 shadow-sm flex flex-col items-center justify-center text-center">
+              <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                <Send className="w-6 h-6 text-green-600" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Message sent successfully!</h3>
+              <p className="text-slate-600 mb-6">Thanks for reaching out. Our team will get back to you shortly.</p>
+              <button onClick={() => setSuccess(false)} className="px-5 py-2.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                Send another message
+              </button>
+            </div>
+          ) : (
           <form onSubmit={onSubmit} className="bg-white rounded-xl border border-slate-200 p-6 md:p-8 space-y-4 shadow-sm">
+            {/* Honeypot — hidden from humans, bots fill it */}
+            <input type="text" name="company_url" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
             <div className="grid sm:grid-cols-2 gap-4">
               <Field label="Name *"><input name="name" required type="text" placeholder="John Doe" className={inputCls} /></Field>
               <Field label="Email *"><input name="email" required type="email" placeholder="john@example.com" className={inputCls} /></Field>
             </div>
-            <Field label="Company"><input name="company" type="text" placeholder="Your Company" className={inputCls} /></Field>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <Field label="Phone"><input name="phone" type="tel" placeholder="+1 (555) 000-0000" className={inputCls} /></Field>
+              <Field label="Company"><input name="company" type="text" placeholder="Your Company" className={inputCls} /></Field>
+            </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <Field label="Service Needed *">
                 <select name="service" required className={inputCls} defaultValue="">
@@ -119,6 +139,7 @@ function ContactPage() {
               <MessageCircle className="w-4 h-4" /> Contact on WhatsApp
             </a>
           </form>
+          )}
         </div>
       </section>
     </SiteLayout>

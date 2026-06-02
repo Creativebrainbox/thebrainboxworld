@@ -26,20 +26,31 @@ const includes = [
 ];
 
 function AuditPage() {
-  const [form, setForm] = useState({ name: "", email: "", website: "", goals: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", website: "", goals: "", company_url: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch('/api/public/audit', {
+      const res = await fetch('/api/public/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          website: form.website,
+          message: form.goals,
+          service: 'SEO & Growth Audit',
+          source_page: 'Book SEO Audit',
+          company_url: form.company_url, // honeypot
+        }),
       });
       if (!res.ok) throw new Error('Failed');
       toast.success("Audit request received! We'll be in touch within 24 hours.");
-      setForm({ name: "", email: "", website: "", goals: "" });
+      setForm({ name: "", email: "", phone: "", website: "", goals: "", company_url: "" });
+      setSuccess(true);
     } catch {
       toast.error("Something went wrong. Please try again or WhatsApp us.");
     } finally {
@@ -67,16 +78,32 @@ function AuditPage() {
               </a>
             </div>
           </div>
+          {success ? (
+            <div className="bg-white border border-green-200 rounded-xl p-8 text-center flex flex-col items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                <Check className="w-6 h-6 text-green-600" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-800 mb-2">Audit request received!</h2>
+              <p className="text-slate-600 mb-6">We'll review your site and get back to you within 24 hours.</p>
+              <button onClick={() => setSuccess(false)} className="px-5 py-2.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">
+                Request another audit
+              </button>
+            </div>
+          ) : (
           <form onSubmit={onSubmit} className="bg-white border border-slate-200 rounded-xl p-6 space-y-4">
             <h2 className="text-xl font-bold text-slate-800">Request your audit</h2>
+            {/* Honeypot — hidden from humans, bots fill it */}
+            <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form.company_url} onChange={(e) => setForm({ ...form, company_url: e.target.value })} className="hidden" />
             <input required aria-label="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
             <input required aria-label="Email address" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email address" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
+            <input aria-label="Phone number" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone number (optional)" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
             <input required aria-label="Your website URL" type="url" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} placeholder="Your website URL" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
             <textarea aria-label="Your growth goals" value={form.goals} onChange={(e) => setForm({ ...form, goals: e.target.value })} rows={4} placeholder="What are your growth goals?" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
             <button type="submit" disabled={submitting} className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold disabled:opacity-60 transition-all hover:scale-[1.02]">
               {submitting ? "Sending..." : "Book My Free Audit"}
             </button>
           </form>
+          )}
         </div>
       </section>
     </SiteLayout>
