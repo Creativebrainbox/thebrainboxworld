@@ -282,7 +282,7 @@ export function LiveChatWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Chat with me on WhatsApp"
-        className="fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl animate-pulse-glow group ring-4 ring-emerald-400/30"
+        className="fixed bottom-24 right-5 md:bottom-28 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl animate-pulse-glow group ring-4 ring-emerald-400/30"
         style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}
       >
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
