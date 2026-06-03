@@ -9,7 +9,7 @@ import { z } from 'zod';
 // 3. Sends an instant Telegram notification
 // 4. Sends a branded email notification to the BrainBox World inbox
 
-const NOTIFY_EMAIL = 'info@brainboxworld.dedyn.io';
+const NOTIFY_EMAIL = 'hellobrainboxworld@gmail.com';
 const SITE_URL = 'https://thebrainboxworld.lovable.app';
 const LOGO_URL = `${SITE_URL}/email-logo.png`;
 
