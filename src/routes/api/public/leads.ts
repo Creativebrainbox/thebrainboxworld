@@ -212,6 +212,12 @@ export const Route = createFileRoute('/api/public/leads')({
             });
           }
 
+          const createdAt = new Date().toLocaleString('en-US', {
+            dateStyle: 'medium',
+            timeStyle: 'short',
+            timeZone: 'UTC',
+          }) + ' UTC';
+
           const lead: Lead = {
             name: parsed.data.name,
             email: parsed.data.email,
@@ -221,6 +227,7 @@ export const Route = createFileRoute('/api/public/leads')({
             service: parsed.data.service || undefined,
             message: parsed.data.message || undefined,
             source_page: parsed.data.source_page,
+            created_at: createdAt,
           };
 
           const { error } = await supabaseAdmin.from('leads').insert({
