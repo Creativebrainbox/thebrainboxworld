@@ -9,7 +9,7 @@ import { z } from 'zod';
 // 3. Sends an instant Telegram notification
 // 4. Sends a branded email notification to the BrainBox World inbox
 
-const NOTIFY_EMAIL = 'info@brainboxworld.dedyn.io';
+const NOTIFY_EMAIL = 'hellobrainboxworld@gmail.com';
 const SITE_URL = 'https://thebrainboxworld.lovable.app';
 const LOGO_URL = `${SITE_URL}/email-logo.png`;
 
@@ -44,6 +44,7 @@ type Lead = {
   service?: string;
   message?: string;
   source_page: string;
+  created_at: string;
 };
 
 async function sendTelegram(lead: Lead) {
@@ -53,16 +54,18 @@ async function sendTelegram(lead: Lead) {
     console.warn('Telegram credentials not configured — skipping Telegram notification');
     return;
   }
+  const line = (label: string, value?: string) => (value ? `${label}: ${value}\n` : '');
   const text =
-    `🚀 New Lead\n\n` +
-    `Name: ${lead.name}\n` +
-    `Email: ${lead.email}\n` +
-    `Phone: ${lead.phone || '—'}\n` +
-    `Company: ${lead.company || '—'}\n` +
-    `Website: ${lead.website || '—'}\n` +
-    (lead.service ? `Service: ${lead.service}\n` : '') +
-    `\nMessage:\n${lead.message || '—'}\n\n` +
-    `Source:\n${lead.source_page}`;
+    `🚀 New Website Lead\n\n` +
+    line('Name', lead.name) +
+    line('Email', lead.email) +
+    line('Phone', lead.phone) +
+    line('Company', lead.company) +
+    line('Website', lead.website) +
+    line('Service', lead.service) +
+    (lead.message ? `\nMessage:\n${lead.message}\n` : '') +
+    `\nSource:\n${lead.source_page}\n` +
+    `\nSubmitted:\n${lead.created_at}`;
 
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -118,15 +121,19 @@ function brandedEmailHtml(lead: Lead): string {
                </td></tr>`
             : ''
         }
-        <tr><td style="padding:18px 28px 8px;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:2px;">Source</div>
+        <tr><td style="padding:18px 28px 4px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:2px;">Page Submitted From</div>
           <div style="font-size:14px;color:#0f172a;font-weight:600;">${escapeHtml(lead.source_page)}</div>
+        </td></tr>
+        <tr><td style="padding:10px 28px 8px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:2px;">Submitted</div>
+          <div style="font-size:14px;color:#0f172a;font-weight:600;">${escapeHtml(lead.created_at)}</div>
         </td></tr>
         <tr><td style="padding:18px 28px 28px;">
           <a href="mailto:${escapeHtml(lead.email)}" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:8px;">Reply to ${escapeHtml(lead.name)}</a>
         </td></tr>
         <tr><td style="padding:18px 28px;background:#0f172a;" align="center">
-          <p style="margin:0;font-size:12px;color:#94a3b8;">© ${new Date().getFullYear()} BrainBox World — Digital Solutions, AI &amp; Automation</p>
+          <p style="margin:0;font-size:12px;color:#94a3b8;">Powered by BrainBox World — Digital Solutions, AI &amp; Automation</p>
         </td></tr>
       </table>
     </td></tr>
@@ -135,16 +142,21 @@ function brandedEmailHtml(lead: Lead): string {
 }
 
 function brandedEmailText(lead: Lead): string {
+  const line = (label: string, value?: string) => (value ? `${label}: ${value}\n` : '');
   return (
-    `New Lead Received\n\n` +
-    `Name: ${lead.name}\n` +
-    `Email: ${lead.email}\n` +
-    `Phone: ${lead.phone || '—'}\n` +
-    `Company: ${lead.company || '—'}\n` +
-    `Website: ${lead.website || '—'}\n` +
-    (lead.service ? `Service: ${lead.service}\n` : '') +
-    `\nMessage:\n${lead.message || '—'}\n\n` +
-    `Source: ${lead.source_page}`
+    `BRAINBOX WORLD\n\n` +
+    `You have received a new lead from your website.\n\n` +
+    `Lead Details\n` +
+    line('Name', lead.name) +
+    line('Email', lead.email) +
+    line('Phone', lead.phone) +
+    line('Company', lead.company) +
+    line('Website', lead.website) +
+    line('Service', lead.service) +
+    (lead.message ? `\nMessage:\n${lead.message}\n` : '') +
+    `\nPage Submitted From: ${lead.source_page}\n` +
+    `Submitted: ${lead.created_at}\n\n` +
+    `Powered by BrainBox World`
   );
 }
 
@@ -165,7 +177,7 @@ async function sendEmail(lead: Lead) {
         from: fromEmail,
         sender_domain: senderDomain,
         reply_to: lead.email,
-        subject: `🚀 New Lead: ${lead.name}${lead.service ? ` — ${lead.service}` : ''}`,
+        subject: `🚀 New Website Lead - ${lead.name}`,
         html: brandedEmailHtml(lead),
         text: brandedEmailText(lead),
         purpose: 'transactional',
@@ -200,6 +212,12 @@ export const Route = createFileRoute('/api/public/leads')({
             });
           }
 
+          const createdAt = new Date().toLocaleString('en-US', {
+            dateStyle: 'medium',
+            timeStyle: 'short',
+            timeZone: 'UTC',
+          }) + ' UTC';
+
           const lead: Lead = {
             name: parsed.data.name,
             email: parsed.data.email,
@@ -209,6 +227,7 @@ export const Route = createFileRoute('/api/public/leads')({
             service: parsed.data.service || undefined,
             message: parsed.data.message || undefined,
             source_page: parsed.data.source_page,
+            created_at: createdAt,
           };
 
           const { error } = await supabaseAdmin.from('leads').insert({

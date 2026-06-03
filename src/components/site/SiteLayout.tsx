@@ -282,7 +282,7 @@ export function LiveChatWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="Chat with me on WhatsApp"
-        className="fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl animate-pulse-glow group ring-4 ring-emerald-400/30"
+        className="fixed bottom-24 right-5 md:bottom-28 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl animate-pulse-glow group ring-4 ring-emerald-400/30"
         style={{ background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)" }}
       >
         <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -298,7 +298,7 @@ export function LiveChatWidget() {
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-24 right-4 md:bottom-28 md:right-7 z-[9999] w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+        <div className="fixed bottom-44 right-4 md:bottom-48 md:right-7 z-[9999] w-[22rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
           <div className="relative p-5 bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-700 text-white overflow-hidden">
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative flex items-center gap-3">
@@ -384,7 +384,7 @@ export function SocialReachWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label="More ways to reach us"
         aria-expanded={open}
-        className="fixed bottom-24 right-5 md:bottom-28 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl group ring-4 ring-cyan-400/30 transition-transform hover:scale-105"
+        className="fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl group ring-4 ring-cyan-400/30 transition-transform hover:scale-105"
         style={{ background: "linear-gradient(135deg, #22d3ee 0%, #0891b2 100%)" }}
       >
         {open ? (
@@ -395,7 +395,7 @@ export function SocialReachWidget() {
       </button>
 
       {open && (
-        <div className="fixed bottom-44 right-4 md:bottom-48 md:right-7 z-[9999] w-[20rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+        <div className="fixed bottom-24 right-4 md:bottom-28 md:right-7 z-[9999] w-[20rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
           <div className="relative p-5 bg-gradient-to-br from-cyan-600 via-cyan-700 to-sky-700 text-white overflow-hidden">
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative">
