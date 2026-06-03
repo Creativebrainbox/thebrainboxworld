@@ -44,6 +44,7 @@ type Lead = {
   service?: string;
   message?: string;
   source_page: string;
+  created_at: string;
 };
 
 async function sendTelegram(lead: Lead) {
@@ -53,16 +54,18 @@ async function sendTelegram(lead: Lead) {
     console.warn('Telegram credentials not configured — skipping Telegram notification');
     return;
   }
+  const line = (label: string, value?: string) => (value ? `${label}: ${value}\n` : '');
   const text =
-    `🚀 New Lead\n\n` +
-    `Name: ${lead.name}\n` +
-    `Email: ${lead.email}\n` +
-    `Phone: ${lead.phone || '—'}\n` +
-    `Company: ${lead.company || '—'}\n` +
-    `Website: ${lead.website || '—'}\n` +
-    (lead.service ? `Service: ${lead.service}\n` : '') +
-    `\nMessage:\n${lead.message || '—'}\n\n` +
-    `Source:\n${lead.source_page}`;
+    `🚀 New Website Lead\n\n` +
+    line('Name', lead.name) +
+    line('Email', lead.email) +
+    line('Phone', lead.phone) +
+    line('Company', lead.company) +
+    line('Website', lead.website) +
+    line('Service', lead.service) +
+    (lead.message ? `\nMessage:\n${lead.message}\n` : '') +
+    `\nSource:\n${lead.source_page}\n` +
+    `\nSubmitted:\n${lead.created_at}`;
 
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
