@@ -384,7 +384,7 @@ export function SocialReachWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label="More ways to reach us"
         aria-expanded={open}
-        className="fixed bottom-24 right-5 md:bottom-28 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl group ring-4 ring-cyan-400/30 transition-transform hover:scale-105"
+        className="fixed bottom-5 right-5 md:bottom-7 md:right-7 z-[9999] w-14 h-14 md:w-16 md:h-16 inline-flex items-center justify-center rounded-full shadow-2xl group ring-4 ring-cyan-400/30 transition-transform hover:scale-105"
         style={{ background: "linear-gradient(135deg, #22d3ee 0%, #0891b2 100%)" }}
       >
         {open ? (
