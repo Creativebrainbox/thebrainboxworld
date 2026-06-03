@@ -395,7 +395,7 @@ export function SocialReachWidget() {
       </button>
 
       {open && (
-        <div className="fixed bottom-44 right-4 md:bottom-48 md:right-7 z-[9999] w-[20rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
+        <div className="fixed bottom-24 right-4 md:bottom-28 md:right-7 z-[9999] w-[20rem] max-w-[calc(100vw-2rem)] glass-strong rounded-2xl overflow-hidden shadow-2xl glow-ring animate-slide-up">
           <div className="relative p-5 bg-gradient-to-br from-cyan-600 via-cyan-700 to-sky-700 text-white overflow-hidden">
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative">
