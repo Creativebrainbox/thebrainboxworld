@@ -177,7 +177,7 @@ async function sendEmail(lead: Lead) {
         from: fromEmail,
         sender_domain: senderDomain,
         reply_to: lead.email,
-        subject: `🚀 New Lead: ${lead.name}${lead.service ? ` — ${lead.service}` : ''}`,
+        subject: `🚀 New Website Lead - ${lead.name}`,
         html: brandedEmailHtml(lead),
         text: brandedEmailText(lead),
         purpose: 'transactional',
