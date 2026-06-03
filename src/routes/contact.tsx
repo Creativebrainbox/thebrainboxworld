@@ -89,8 +89,8 @@ function ContactPage() {
               <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-4">
                 <Send className="w-6 h-6 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-slate-800 mb-2">Message sent successfully!</h3>
-              <p className="text-slate-600 mb-6">Thanks for reaching out. Our team will get back to you shortly.</p>
+              <h3 className="text-xl font-bold text-slate-800 mb-2">Thank you for contacting BrainBox World</h3>
+              <p className="text-slate-600 mb-6">We have received your request and will contact you shortly.</p>
               <button onClick={() => setSuccess(false)} className="px-5 py-2.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                 Send another message
               </button>
