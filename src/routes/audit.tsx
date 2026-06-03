@@ -79,26 +79,36 @@ function AuditPage() {
             </div>
           </div>
           {success ? (
-            <div className="bg-white border border-green-200 rounded-xl p-8 text-center flex flex-col items-center justify-center">
+            <div className="bg-white border border-green-200 rounded-xl p-8 text-center flex flex-col items-center justify-center shadow-sm">
               <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-4">
                 <Check className="w-6 h-6 text-green-600" />
               </div>
-              <h2 className="text-xl font-bold text-slate-800 mb-2">Audit request received!</h2>
-              <p className="text-slate-600 mb-6">We'll review your site and get back to you within 24 hours.</p>
+              <h2 className="text-xl font-bold text-slate-800 mb-2">Request received!</h2>
+              <p className="text-slate-600 mb-6">Thank you for contacting BrainBox World. We have received your request and will contact you shortly.</p>
               <button onClick={() => setSuccess(false)} className="px-5 py-2.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                 Request another audit
               </button>
             </div>
           ) : (
-          <form onSubmit={onSubmit} className="bg-white border border-slate-200 rounded-xl p-6 space-y-4">
+          <form onSubmit={onSubmit} className="bg-white rounded-xl border border-slate-200 p-6 md:p-8 space-y-4 shadow-sm">
             <h2 className="text-xl font-bold text-slate-800">Request your audit</h2>
             {/* Honeypot — hidden from humans, bots fill it */}
             <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form.company_url} onChange={(e) => setForm({ ...form, company_url: e.target.value })} className="hidden" />
-            <input required aria-label="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
-            <input required aria-label="Email address" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="Email address" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
-            <input aria-label="Phone number" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone number (optional)" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
-            <input required aria-label="Your website URL" type="url" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} placeholder="Your website URL" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
-            <textarea aria-label="Your growth goals" value={form.goals} onChange={(e) => setForm({ ...form, goals: e.target.value })} rows={4} placeholder="What are your growth goals?" className="w-full px-4 py-3 border border-slate-300 rounded-md" />
+            <Field label="Name *">
+              <input required type="text" aria-label="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="John Doe" className={inputCls} />
+            </Field>
+            <Field label="Email *">
+              <input required type="email" aria-label="Email address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="john@example.com" className={inputCls} />
+            </Field>
+            <Field label="Phone">
+              <input type="tel" aria-label="Phone number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+1 (555) 000-0000" className={inputCls} />
+            </Field>
+            <Field label="Website *">
+              <input required type="url" aria-label="Your website URL" value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} placeholder="https://yourwebsite.com" className={inputCls} />
+            </Field>
+            <Field label="Growth goals">
+              <textarea aria-label="Your growth goals" value={form.goals} onChange={(e) => setForm({ ...form, goals: e.target.value })} rows={4} placeholder="What are your growth goals?" className={inputCls} />
+            </Field>
             <button type="submit" disabled={submitting} className="w-full py-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold disabled:opacity-60 transition-all hover:scale-[1.02]">
               {submitting ? "Sending..." : "Book My Free Audit"}
             </button>
