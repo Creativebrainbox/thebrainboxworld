@@ -121,15 +121,19 @@ function brandedEmailHtml(lead: Lead): string {
                </td></tr>`
             : ''
         }
-        <tr><td style="padding:18px 28px 8px;">
-          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:2px;">Source</div>
+        <tr><td style="padding:18px 28px 4px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:2px;">Page Submitted From</div>
           <div style="font-size:14px;color:#0f172a;font-weight:600;">${escapeHtml(lead.source_page)}</div>
+        </td></tr>
+        <tr><td style="padding:10px 28px 8px;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;margin-bottom:2px;">Submitted</div>
+          <div style="font-size:14px;color:#0f172a;font-weight:600;">${escapeHtml(lead.created_at)}</div>
         </td></tr>
         <tr><td style="padding:18px 28px 28px;">
           <a href="mailto:${escapeHtml(lead.email)}" style="display:inline-block;background:#2563eb;color:#ffffff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:8px;">Reply to ${escapeHtml(lead.name)}</a>
         </td></tr>
         <tr><td style="padding:18px 28px;background:#0f172a;" align="center">
-          <p style="margin:0;font-size:12px;color:#94a3b8;">© ${new Date().getFullYear()} BrainBox World — Digital Solutions, AI &amp; Automation</p>
+          <p style="margin:0;font-size:12px;color:#94a3b8;">Powered by BrainBox World — Digital Solutions, AI &amp; Automation</p>
         </td></tr>
       </table>
     </td></tr>
