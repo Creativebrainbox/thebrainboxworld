@@ -142,16 +142,21 @@ function brandedEmailHtml(lead: Lead): string {
 }
 
 function brandedEmailText(lead: Lead): string {
+  const line = (label: string, value?: string) => (value ? `${label}: ${value}\n` : '');
   return (
-    `New Lead Received\n\n` +
-    `Name: ${lead.name}\n` +
-    `Email: ${lead.email}\n` +
-    `Phone: ${lead.phone || '—'}\n` +
-    `Company: ${lead.company || '—'}\n` +
-    `Website: ${lead.website || '—'}\n` +
-    (lead.service ? `Service: ${lead.service}\n` : '') +
-    `\nMessage:\n${lead.message || '—'}\n\n` +
-    `Source: ${lead.source_page}`
+    `BRAINBOX WORLD\n\n` +
+    `You have received a new lead from your website.\n\n` +
+    `Lead Details\n` +
+    line('Name', lead.name) +
+    line('Email', lead.email) +
+    line('Phone', lead.phone) +
+    line('Company', lead.company) +
+    line('Website', lead.website) +
+    line('Service', lead.service) +
+    (lead.message ? `\nMessage:\n${lead.message}\n` : '') +
+    `\nPage Submitted From: ${lead.source_page}\n` +
+    `Submitted: ${lead.created_at}\n\n` +
+    `Powered by BrainBox World`
   );
 }
 
