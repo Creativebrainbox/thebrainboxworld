@@ -95,19 +95,53 @@ function BlogPostPage() {
         <div className="bg-slate-50">
           <div className="max-w-3xl mx-auto px-4 md:px-8 py-10 md:py-14">
             <img src={post.img} alt={post.title} className="w-full rounded-2xl border border-slate-200 mb-10 object-cover" />
-            <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-8">{post.intro}</p>
-            <div className="space-y-8">
+            <p className="text-lg md:text-xl text-slate-700 leading-relaxed mb-10">{post.intro}</p>
+            <div className="space-y-10">
               {post.sections.map((s: BlogSection, i: number) => (
                 <section key={i}>
-                  {s.heading && <h2 className="text-xl md:text-2xl font-bold text-slate-800 mb-3">{s.heading}</h2>}
-                  <div className="space-y-4">
-                    {s.paras.map((p: string, j: number) => (
-                      <p key={j} className="text-slate-600 leading-relaxed">{p}</p>
-                    ))}
-                  </div>
+                  {s.heading && <h2 className="text-2xl md:text-3xl font-bold font-display text-slate-900 mb-4">{s.heading}</h2>}
+                  {s.paras && (
+                    <div className="space-y-4">
+                      {s.paras.map((p: string, j: number) => (
+                        <p key={j} className="text-base md:text-lg text-slate-600 leading-relaxed">
+                          <RichText text={p} />
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                  {s.list && (
+                    <ul className="mt-4 space-y-3">
+                      {s.list.map((item: string, j: number) => (
+                        <li key={j} className="flex items-start gap-3 text-base md:text-lg text-slate-600 leading-relaxed">
+                          <Check className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
+                          <span><RichText text={item} /></span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {s.quote && (
+                    <blockquote className="mt-5 border-l-4 border-blue-600 pl-5 italic text-lg text-slate-700">
+                      <RichText text={s.quote} />
+                    </blockquote>
+                  )}
                 </section>
               ))}
             </div>
+
+            {/* Key takeaways */}
+            {post.keyTakeaways?.length > 0 && (
+              <div className="mt-12 bg-slate-900 rounded-2xl p-8">
+                <h2 className="text-lg font-bold text-white mb-4">Key takeaways</h2>
+                <ul className="space-y-3">
+                  {post.keyTakeaways.map((t, i) => (
+                    <li key={i} className="flex items-start gap-3 text-slate-200 leading-relaxed">
+                      <Check className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* CTA */}
             <div className="mt-12 bg-white rounded-2xl border border-slate-200 p-8 text-center">
