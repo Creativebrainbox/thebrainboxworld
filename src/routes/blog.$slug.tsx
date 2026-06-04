@@ -1,7 +1,24 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { Fragment } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { blogPosts, getPostBySlug, type BlogPost, type BlogSection } from "@/lib/blog-posts";
+
+// Render **bold** segments inline without a markdown dependency.
+function RichText({ text }: { text: string }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+  return (
+    <>
+      {parts.map((part, i) =>
+        part.startsWith("**") && part.endsWith("**") ? (
+          <strong key={i} className="font-semibold text-slate-800">{part.slice(2, -2)}</strong>
+        ) : (
+          <Fragment key={i}>{part}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
