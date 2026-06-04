@@ -88,6 +88,7 @@ function BlogPostPage() {
             </div>
             <h1 className="text-3xl md:text-5xl font-bold font-display text-white leading-tight">{post.title}</h1>
             <p className="mt-5 text-lg text-slate-300">{post.excerpt}</p>
+            <p className="mt-4 text-sm text-indigo-200">By {post.author}</p>
           </div>
         </header>
 
