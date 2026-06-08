@@ -210,7 +210,7 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-2">
-          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">EXPLORE</h4>
+          <h3 className="text-white font-semibold mb-4 text-sm tracking-wider">EXPLORE</h3>
           <ul className="space-y-2.5 text-sm text-slate-400">
             <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
