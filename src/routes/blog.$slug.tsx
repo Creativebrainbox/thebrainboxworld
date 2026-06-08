@@ -73,7 +73,7 @@ function BlogPostPage() {
     <SiteLayout>
       <article className="bg-white">
         {/* Hero */}
-        <header className="relative overflow-hidden border-b border-white/5">
+        <header className="relative overflow-hidden border-b border-white/5 bg-slate-900">
           <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
           <div className="absolute inset-0 bg-grid opacity-40" />
           <div className="relative max-w-3xl mx-auto px-4 md:px-8 py-12 md:py-16">
