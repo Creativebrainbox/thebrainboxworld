@@ -77,7 +77,7 @@ function ContactPage() {
               <InfoRow icon={MapPin} title="Location">Remote</InfoRow>
             </div>
             <div className="mt-8">
-              <h4 className="font-semibold text-slate-800 mb-3">Follow Us</h4>
+              <h3 className="font-semibold text-slate-800 mb-3">Follow Us</h3>
               <SocialLinks />
             </div>
           </div>

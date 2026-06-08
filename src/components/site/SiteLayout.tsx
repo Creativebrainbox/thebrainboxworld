@@ -210,7 +210,7 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-2">
-          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">EXPLORE</h4>
+          <h3 className="text-white font-semibold mb-4 text-sm tracking-wider">EXPLORE</h3>
           <ul className="space-y-2.5 text-sm text-slate-400">
             <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
             <li><Link to="/about" className="hover:text-white transition-colors">About</Link></li>
@@ -221,7 +221,7 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-2">
-          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">COMPANY</h4>
+          <h3 className="text-white font-semibold mb-4 text-sm tracking-wider">COMPANY</h3>
           <ul className="space-y-2.5 text-sm text-slate-400">
             <li><Link to="/packages" className="hover:text-white transition-colors">Pricing</Link></li>
             <li><Link to="/audit" className="hover:text-white transition-colors">Free Audit</Link></li>
@@ -231,7 +231,7 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-4">
-          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">GET IN TOUCH</h4>
+          <h3 className="text-white font-semibold mb-4 text-sm tracking-wider">GET IN TOUCH</h3>
           <ul className="space-y-3 text-sm text-slate-300">
             <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-indigo-400" /><a href={WHATSAPP_LINK} className="hover:text-white">+1 (331) 278-2900</a></li>
             <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-indigo-400" /><a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white">{CONTACT_EMAIL}</a></li>
@@ -303,7 +303,7 @@ export function LiveChatWidget() {
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative flex items-center gap-3">
               <div className="relative">
-                <img src={logo} alt="BrainBoxWorld" className="w-10 h-10 rounded-full bg-white/10 p-0.5 border border-white/20" />
+                <img src={logo} alt="BrainBoxWorld company logo" className="w-10 h-10 rounded-full bg-white/10 p-0.5 border border-white/20" />
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-indigo-700" />
               </div>
               <div>
@@ -317,7 +317,7 @@ export function LiveChatWidget() {
 
           <div className="p-4 space-y-3 max-h-[22rem] overflow-y-auto bg-[#0a0a1a]/70">
             <div className="flex gap-2">
-              <img src={logo} alt="" className="w-7 h-7 rounded-full bg-white/5 p-0.5 border border-white/10 flex-shrink-0" />
+              <img src={logo} alt="BrainBoxWorld company logo" className="w-7 h-7 rounded-full bg-white/5 p-0.5 border border-white/10 flex-shrink-0" />
               <div className="bg-white/5 border border-white/10 rounded-2xl rounded-tl-sm px-3 py-2 text-sm text-slate-200 max-w-[80%]">
                 👋 Hi there! How can we help you today? Pick a topic or send us a message — we'll continue on WhatsApp.
               </div>
