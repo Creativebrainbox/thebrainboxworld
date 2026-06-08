@@ -221,7 +221,7 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-2">
-          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">COMPANY</h4>
+          <h3 className="text-white font-semibold mb-4 text-sm tracking-wider">COMPANY</h3>
           <ul className="space-y-2.5 text-sm text-slate-400">
             <li><Link to="/packages" className="hover:text-white transition-colors">Pricing</Link></li>
             <li><Link to="/audit" className="hover:text-white transition-colors">Free Audit</Link></li>
