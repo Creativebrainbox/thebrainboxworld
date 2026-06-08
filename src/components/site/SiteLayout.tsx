@@ -303,7 +303,7 @@ export function LiveChatWidget() {
             <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/20 rounded-full blur-2xl" />
             <div className="relative flex items-center gap-3">
               <div className="relative">
-                <img src={logo} alt="BrainBoxWorld" className="w-10 h-10 rounded-full bg-white/10 p-0.5 border border-white/20" />
+                <img src={logo} alt="BrainBoxWorld company logo" className="w-10 h-10 rounded-full bg-white/10 p-0.5 border border-white/20" />
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-indigo-700" />
               </div>
               <div>
