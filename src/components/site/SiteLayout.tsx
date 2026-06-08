@@ -317,7 +317,7 @@ export function LiveChatWidget() {
 
           <div className="p-4 space-y-3 max-h-[22rem] overflow-y-auto bg-[#0a0a1a]/70">
             <div className="flex gap-2">
-              <img src={logo} alt="" className="w-7 h-7 rounded-full bg-white/5 p-0.5 border border-white/10 flex-shrink-0" />
+              <img src={logo} alt="BrainBoxWorld company logo" className="w-7 h-7 rounded-full bg-white/5 p-0.5 border border-white/10 flex-shrink-0" />
               <div className="bg-white/5 border border-white/10 rounded-2xl rounded-tl-sm px-3 py-2 text-sm text-slate-200 max-w-[80%]">
                 👋 Hi there! How can we help you today? Pick a topic or send us a message — we'll continue on WhatsApp.
               </div>
