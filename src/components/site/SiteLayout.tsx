@@ -231,7 +231,7 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-4">
-          <h4 className="text-white font-semibold mb-4 text-sm tracking-wider">GET IN TOUCH</h4>
+          <h3 className="text-white font-semibold mb-4 text-sm tracking-wider">GET IN TOUCH</h3>
           <ul className="space-y-3 text-sm text-slate-300">
             <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-indigo-400" /><a href={WHATSAPP_LINK} className="hover:text-white">+1 (331) 278-2900</a></li>
             <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-indigo-400" /><a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-white">{CONTACT_EMAIL}</a></li>
