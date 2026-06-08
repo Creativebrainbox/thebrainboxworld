@@ -19,6 +19,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuditRouteImport } from './routes/audit'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
@@ -74,6 +75,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -115,7 +122,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/audit': typeof AuditRoute
-  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
@@ -123,6 +129,7 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -140,6 +147,7 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
@@ -158,6 +166,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/sitemap.xml'
     | '/blog/$slug'
+    | '/blog/'
     | '/api/public/audit'
     | '/api/public/contact'
     | '/api/public/leads'
@@ -166,7 +175,6 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/audit'
-    | '/blog'
     | '/case-studies'
     | '/contact'
     | '/experience'
@@ -174,6 +182,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/sitemap.xml'
     | '/blog/$slug'
+    | '/blog'
     | '/api/public/audit'
     | '/api/public/contact'
     | '/api/public/leads'
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/sitemap.xml'
     | '/blog/$slug'
+    | '/blog/'
     | '/api/public/audit'
     | '/api/public/contact'
     | '/api/public/leads'
@@ -283,6 +293,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
@@ -316,10 +333,12 @@ declare module '@tanstack/react-router' {
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
@@ -342,3 +361,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
