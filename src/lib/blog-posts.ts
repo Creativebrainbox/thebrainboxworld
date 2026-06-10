@@ -21,6 +21,119 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "evaluating-ecommerce-seo-agencies",
+    tag: "SEO & Agency Selection",
+    read: "10 min read",
+    title: "How to Evaluate eCommerce SEO Agencies (A Buyer's Guide for 2026)",
+    excerpt:
+      "Most SEO agencies sell rankings, not revenue. Use this framework to separate the operators who move the needle from the ones who bill for activity.",
+    date: "April 2026",
+    author: "BrainBox World Strategy Team",
+    img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&h=700&fit=crop",
+    intro:
+      "Hiring an SEO agency is one of the highest-stakes vendor decisions an eCommerce brand makes. The right partner compounds your traffic and revenue for years; the wrong one drains budget into reports nobody reads. The problem is that almost every agency sounds the same in a pitch. This guide gives you a repeatable framework to evaluate eCommerce SEO agencies on what actually matters — outcomes, not buzzwords.",
+    sections: [
+      {
+        heading: "Start with the outcome, not the deliverables",
+        paras: [
+          "Weak agencies sell inputs: \"20 blog posts a month\", \"100 backlinks\", \"a technical audit\". Strong agencies sell outcomes: qualified organic traffic that converts into revenue. Before you evaluate anyone, decide what success looks like in your own numbers.",
+          "If an agency can't connect their work to **revenue or pipeline**, they're selling activity. Activity is easy to bill for and impossible to hold accountable. Anchor every conversation on the result you're buying, and watch how quickly the field narrows.",
+        ],
+        list: [
+          "Define the metric that matters: organic revenue, assisted conversions, or qualified leads.",
+          "Set a realistic timeline — meaningful eCommerce SEO results take 3–6 months to compound.",
+          "Agree on how success will be measured before you sign, not after.",
+        ],
+      },
+      {
+        heading: "Demand proof, not promises",
+        paras: [
+          "Anyone can claim results. A credible eCommerce SEO agency can show them — with case studies that name the metric, the timeframe, and ideally the client. Be skeptical of vague \"+300% traffic\" claims with no baseline or context.",
+          "The strongest signal is a **client you can talk to**. Ask for a reference in your category or at your stage. A confident agency will connect you; a nervous one will stall.",
+        ],
+        list: [
+          "Ask for case studies in eCommerce specifically, not B2B or local services.",
+          "Look for before/after revenue or conversion data, not just ranking screenshots.",
+          "Request a reference call with a current client.",
+        ],
+      },
+      {
+        heading: "Check that they understand eCommerce, not just SEO",
+        paras: [
+          "eCommerce SEO is its own discipline. Product and category page optimization, faceted navigation, structured data for products, crawl-budget management on large catalogs, and handling out-of-stock or seasonal URLs are problems a generalist agency will fumble.",
+          "Ask how they'd handle **duplicate content across product variants** or **thin category pages**. The depth of their answer tells you whether they've actually run stores or just read about them.",
+        ],
+        list: [
+          "Product schema and rich results for pricing, reviews, and availability.",
+          "Faceted navigation and parameter handling without bloating the index.",
+          "A plan for discontinued, out-of-stock, and seasonal product URLs.",
+        ],
+      },
+      {
+        heading: "Interrogate their process and transparency",
+        paras: [
+          "Black-box SEO is a red flag. A trustworthy agency will explain their methodology in plain language, show you exactly what they'll do in the first 90 days, and give you direct access to the work — not just a polished monthly summary.",
+          "You should own your assets. Confirm that **your analytics, Search Console, and content** stay in your accounts, under your control, so you're never held hostage if the relationship ends.",
+        ],
+        list: [
+          "A clear 30/60/90-day plan you can understand without jargon.",
+          "Access to live dashboards, not just retrospective PDF reports.",
+          "All accounts, content, and links owned by you, not the agency.",
+        ],
+      },
+      {
+        heading: "Watch for the red flags",
+        paras: [
+          "Some warning signs are reliable. Guarantees of \"#1 rankings\", secret tactics they won't explain, and pressure to sign long contracts before any audit are all signs of an agency that overpromises and underdelivers.",
+          "The riskiest of all is anyone leaning on **link schemes or AI-spun content at scale**. Those tactics borrow short-term gains against long-term penalties — and your store pays the bill when an algorithm update lands.",
+        ],
+        list: [
+          "Guaranteed rankings — no one can promise Google's results.",
+          "Refusal to explain their link-building sources.",
+          "Long lock-in contracts with no performance off-ramp.",
+        ],
+      },
+      {
+        heading: "Pricing: align incentives, not just budgets",
+        paras: [
+          "Cheap SEO is usually expensive. The lowest bid often means offshore content mills and link schemes that create cleanup costs later. But high fees don't guarantee quality either — what matters is whether the pricing model aligns the agency's incentives with your growth.",
+          "Favor partners whose **success is tied to yours**, whether through transparent retainers with clear deliverables or performance-linked components. The goal is a relationship where they win when you grow.",
+        ],
+      },
+      {
+        heading: "The 10-question scorecard",
+        paras: [
+          "Run every agency through the same questions and score the answers. Consistency is what turns a gut-feel decision into a defensible one.",
+        ],
+        list: [
+          "Can you show eCommerce case studies with revenue impact?",
+          "How do you measure success, and how often do we review it?",
+          "What does the first 90 days look like, concretely?",
+          "How do you approach product and category page SEO?",
+          "Where do your backlinks come from?",
+          "Who owns the content, accounts, and links?",
+          "What does reporting look like, and can I see it live?",
+          "Who actually does the work — in-house or outsourced?",
+          "What's your contract length and exit process?",
+          "Can I speak to a current client in my category?",
+        ],
+      },
+      {
+        heading: "Making the final call",
+        paras: [
+          "The best eCommerce SEO agency for you isn't the biggest or the cheapest — it's the one that understands your business, ties its work to revenue, and operates transparently enough that you can hold it accountable.",
+          "Use the scorecard, trust the proof over the pitch, and choose the partner you can confidently run alongside for the next year. That's the relationship that compounds.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Buy outcomes (revenue), not deliverables (posts and links).",
+      "Demand eCommerce-specific proof and a reference call.",
+      "Transparency and asset ownership separate partners from vendors.",
+      "Guaranteed rankings and secret tactics are reliable red flags.",
+    ],
+  },
+  {
     slug: "why-your-site-isnt-converting",
     tag: "Conversion Optimization",
     read: "9 min read",
