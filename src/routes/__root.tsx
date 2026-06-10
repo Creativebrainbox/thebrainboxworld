@@ -73,6 +73,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "4hZeLM1DZGS9eenB6jW2KLBNJWgf4oy-iO0NzwMsXiM" },
       { title: "BrainBoxWorld — Digital Marketing & SEO Services" },
       { name: "description", content: "Professional Digital Marketing & SEO services. We help businesses achieve first-page Google rankings, boost traffic and grow conversions." },
       { name: "author", content: "BrainBoxWorld" },
