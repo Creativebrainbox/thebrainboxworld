@@ -26,7 +26,7 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!post) throw notFound();
     return post;
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData, params }) => ({
     meta: loaderData
       ? [
           { title: `${loaderData.title} — BrainBoxWorld` },
@@ -35,10 +35,38 @@ export const Route = createFileRoute("/blog/$slug")({
           { property: "og:description", content: loaderData.excerpt },
           { property: "og:image", content: loaderData.img },
           { property: "og:type", content: "article" },
+          { property: "og:url", content: `https://thebrainboxworld.lovable.app/blog/${params.slug}` },
           { name: "twitter:card", content: "summary_large_image" },
           { name: "twitter:image", content: loaderData.img },
         ]
       : [{ title: "Article — BrainBoxWorld" }],
+    links: loaderData
+      ? [{ rel: "canonical", href: `https://thebrainboxworld.lovable.app/blog/${params.slug}` }]
+      : [],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: loaderData.title,
+              description: loaderData.excerpt,
+              image: loaderData.img,
+              author: { "@type": "Person", name: loaderData.author },
+              publisher: {
+                "@type": "Organization",
+                name: "BrainBoxWorld",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://thebrainboxworld.lovable.app/favicon.ico",
+                },
+              },
+              mainEntityOfPage: `https://thebrainboxworld.lovable.app/blog/${params.slug}`,
+            }),
+          },
+        ]
+      : [],
   }),
   component: BlogPostPage,
   errorComponent: ({ error }) => (

@@ -9,6 +9,33 @@ export const Route = createFileRoute("/packages")({
       { name: "description", content: "Choose your digital marketing package. Starter, Professional and Enterprise plans designed to grow your business online." },
       { property: "og:title", content: "Digital Marketing Packages — BrainBoxWorld" },
       { property: "og:description", content: "Transparent pricing for SEO, web development and digital marketing services." },
+      { property: "og:url", content: "https://thebrainboxworld.lovable.app/packages" },
+    ],
+    links: [{ rel: "canonical", href: "https://thebrainboxworld.lovable.app/packages" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          itemListElement: plans.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Product",
+              name: p.name,
+              description: p.subtitle,
+              brand: { "@type": "Brand", name: "BrainBoxWorld" },
+              offers: {
+                "@type": "Offer",
+                price: p.price.replace(/[^0-9.]/g, ""),
+                priceCurrency: "USD",
+                availability: "https://schema.org/InStock",
+              },
+            },
+          })),
+        }),
+      },
     ],
   }),
   component: PackagesPage,

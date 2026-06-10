@@ -14,7 +14,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "BrainBoxWorld builds high-performance websites, AI systems, automation, and growth-focused digital experiences. Book a 30-minute strategy call." },
       { property: "og:title", content: "BrainBoxWorld — Modern Digital Solutions" },
       { property: "og:description", content: "Websites, apps, AI, automation, and growth systems that scale. Book a 30-minute strategy call." },
+      { property: "og:url", content: "https://thebrainboxworld.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://thebrainboxworld.lovable.app/" }],
   }),
   component: HomePage,
 });
