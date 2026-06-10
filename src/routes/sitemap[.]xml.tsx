@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { blogPosts } from "@/lib/blog-posts";
 
 const BASE_URL = "https://thebrainboxworld.lovable.app";
 
@@ -23,6 +24,11 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/audit", changefreq: "monthly", priority: "0.8" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
+          ...blogPosts.map((p) => ({
+            path: `/blog/${p.slug}`,
+            changefreq: "monthly" as const,
+            priority: "0.6",
+          })),
         ];
 
         const urls = entries.map((e) =>
