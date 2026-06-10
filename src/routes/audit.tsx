@@ -11,7 +11,9 @@ export const Route = createFileRoute("/audit")({
       { name: "description", content: "Book a free Growth Foundations Audit — a strategic diagnostic that gives you clarity and confidence to scale." },
       { property: "og:title", content: "Free SEO & Growth Audit — BrainBoxWorld" },
       { property: "og:description", content: "Diagnostic-led audit for brands ready to scale without structural friction." },
+      { property: "og:url", content: "https://thebrainboxworld.lovable.app/audit" },
     ],
+    links: [{ rel: "canonical", href: "https://thebrainboxworld.lovable.app/audit" }],
   }),
   component: AuditPage,
 });

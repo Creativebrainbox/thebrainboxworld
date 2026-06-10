@@ -9,7 +9,9 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "BrainBoxWorld is a digital marketing agency with 8+ years of experience building SEO and growth systems that scale." },
       { property: "og:title", content: "About BrainBoxWorld" },
       { property: "og:description", content: "Strategy-first. Conversion-obsessed. Full-stack execution." },
+      { property: "og:url", content: "https://thebrainboxworld.lovable.app/about" },
     ],
+    links: [{ rel: "canonical", href: "https://thebrainboxworld.lovable.app/about" }],
   }),
   component: AboutPage,
 });

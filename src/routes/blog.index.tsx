@@ -10,7 +10,9 @@ export const Route = createFileRoute("/blog/")({
       { name: "description", content: "Strategic insights, tactical guides, and growth frameworks from the BrainBoxWorld team." },
       { property: "og:title", content: "BrainBoxWorld Blog" },
       { property: "og:description", content: "SEO, conversion, and growth insights for ambitious brands." },
+      { property: "og:url", content: "https://thebrainboxworld.lovable.app/blog" },
     ],
+    links: [{ rel: "canonical", href: "https://thebrainboxworld.lovable.app/blog" }],
   }),
   component: BlogPage,
 });
